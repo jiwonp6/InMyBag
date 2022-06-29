@@ -1,0 +1,44 @@
+@charset "UTF-8";
+*{
+    margin:0;
+    padding:0;
+}
+div#content_form{
+	margin: 0 auto;
+}
+table td {
+	margin: 0 auto;
+	border:1px solid red;
+}
+fieldset {
+	width:800px;
+	margin: 0 auto;
+}
+div.wrap{
+	width:305px;
+	margin: 0 auto;
+}
+div.modify_comment h2{
+	background-color:red;
+	color:red;
+	border:12px solid red;
+}
+div#oldpwChkResult,
+div#pwChkResult,
+div#emailConfirmResult{
+	font-size:13px;
+	text-align: left;
+}
+p.id{
+	text-align: left;
+	font-size: 12px;
+}
+.btn{
+	width:150px;
+	hegiht:70px;
+	border:none;
+	background-color: black;
+	color:white;
+	font-size:15px;
+	radius:0;
+}

@@ -1,0 +1,52 @@
+@charset "UTF-8";
+*{
+    margin:0;
+    padding:0;
+}
+#content_form{
+	margin: 20px auto;
+	
+}
+table{
+	margin: 0 auto;
+}
+fieldset {
+	width:800px;
+	margin: 0 auto;
+}
+div.wrap{
+	width:305px;
+	margin: 0 auto;
+}
+div#idConfirmResult,
+div#pwChkResult,
+div#emailConfirmResult{
+	font-size:13px;
+	text-align: left;
+}
+p.id{
+	text-align: left;
+	font-size: 12px;
+}
+div.wrap>p.n{
+	border:1px solid red;
+	margin-bottom:0;
+	font-size:100px;
+	text-align: left;
+}
+p.textpool{
+	height:100px;
+	overflow: auto;
+}
+p.agree{
+	text-align: right;
+}
+.btn{
+	width:150px;
+	hegiht:70px;
+	border:none;
+	background-color: black;
+	color:white;
+	font-size:15px;
+	radius:0;
+}

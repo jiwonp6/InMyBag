@@ -1,0 +1,43 @@
+@charset "UTF-8";
+ * {
+	margin: 0 auto;
+}
+article {
+	width: 800px; 
+	height:800px;
+	margin: 30px auto 0px;
+}
+article header{
+	width:90%;
+	height:100px;
+	margin: 20px auto 0;
+	text-align: left;
+}
+article section{
+	width:90%;
+	height: 570px;
+	margin: 0 auto;
+}
+article section div{
+	width:90%;
+	height:20px;
+	margin: 0 auto;
+	text-align: right; 
+}
+article section table{
+	width:90%;
+	margin: 0 auto;
+}
+article section table tr { 
+	height: 15px;
+}
+article section td, article section th {
+	text-align: center;
+	padding:5px; 
+}
+article footer{
+	width:90%;
+	height:25px;
+	text-align:center;
+	margin:0 auto;
+}
