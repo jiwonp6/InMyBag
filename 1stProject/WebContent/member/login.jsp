@@ -14,7 +14,7 @@
 <body>
 	<jsp:include page="../main/header.jsp" />
 	<div id="content_form">
-		<form action="${conPath }/login.do" method="post">
+		<form action="${conPath }/login.let" method="post">
 			<table>
 				<tr>
 					<td><h1>LOGIN</h1></td>
@@ -39,7 +39,7 @@
 				<tr>
 					<td>
 						<input type="submit" value="LOGIN" class="btn">
-						<input type="button" value="JOIN US" class="btn"	onclick="location.href='${conPath}/joinView.do'">
+						<input type="button" value="JOIN US" class="btn"	onclick="location.href='${conPath}/joinView.let'">
 					</td>
 				</tr>
 			</table>

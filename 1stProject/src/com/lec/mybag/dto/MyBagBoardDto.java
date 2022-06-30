@@ -1,6 +1,5 @@
 package com.lec.mybag.dto;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class MyBagBoardDto {
@@ -8,22 +7,19 @@ public class MyBagBoardDto {
 	private String mId;
 	private String bName;
 	private String bContent;
-	private String bFilename1;
-	private String bFilename2;
-	private String bFilename3;
+	private String bFilename;
 	private int bHit;
 	private Timestamp bRdate;
 	private String bIp;
 	public MyBagBoardDto() {	}
-	public MyBagBoardDto(int bId, String mId, String bName, String bContent, String bFilename1, String bFilename2,
-			String bFilename3, int bHit, Timestamp bRdate, String bIp) {
+	public MyBagBoardDto(int bId, String mId, String bName, String bContent, String bFilename, int bHit,
+			Timestamp bRdate, String bIp) {
+		super();
 		this.bId = bId;
 		this.mId = mId;
 		this.bName = bName;
 		this.bContent = bContent;
-		this.bFilename1 = bFilename1;
-		this.bFilename2 = bFilename2;
-		this.bFilename3 = bFilename3;
+		this.bFilename = bFilename;
 		this.bHit = bHit;
 		this.bRdate = bRdate;
 		this.bIp = bIp;
@@ -52,23 +48,11 @@ public class MyBagBoardDto {
 	public void setbContent(String bContent) {
 		this.bContent = bContent;
 	}
-	public String getbFilename1() {
-		return bFilename1;
+	public String getbFilename() {
+		return bFilename;
 	}
-	public void setbFilename1(String bFilename1) {
-		this.bFilename1 = bFilename1;
-	}
-	public String getbFilename2() {
-		return bFilename2;
-	}
-	public void setbFilename2(String bFilename2) {
-		this.bFilename2 = bFilename2;
-	}
-	public String getbFilename3() {
-		return bFilename3;
-	}
-	public void setbFilename3(String bFilename3) {
-		this.bFilename3 = bFilename3;
+	public void setbFilename(String bFilename) {
+		this.bFilename = bFilename;
 	}
 	public int getbHit() {
 		return bHit;
@@ -91,8 +75,7 @@ public class MyBagBoardDto {
 	@Override
 	public String toString() {
 		return "MyBagBoardDto [bId=" + bId + ", mId=" + mId + ", bName=" + bName + ", bContent=" + bContent
-				+ ", bFilename1=" + bFilename1 + ", bFilename2=" + bFilename2 + ", bFilename3=" + bFilename3 + ", bHit="
-				+ bHit + ", bRdate=" + bRdate + ", bIp=" + bIp + "]";
+				+ ", bFilename=" + bFilename + ", bHit=" + bHit + ", bRdate=" + bRdate + ", bIp=" + bIp + "]";
 	}
 	
 }

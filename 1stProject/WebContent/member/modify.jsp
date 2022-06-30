@@ -9,11 +9,75 @@
 <meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="conPath/css/modify.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('input[name="oldmPw"]').keyup(
+					function() {
+						var oldmPw = $('input[name="oldmPw"]').val();
+						var mPw = ${member.mId };
+						if (oldmPw == mPw) {
+							$('#pwChkResult').text('확인');
+						} else {
+							$('#pwChkResult').html('<b>비밀번호 불일치</b>');
+						}
+					}); // new pw check
+			$('input[name="newmPw"], input[name="mPwChk"]').keyup(
+				function() {
+					var newmPw = $('input[name="newmPw"]').val();
+					var mPwChk = $('input[name="mPwChk"]').val();
+					if (newmPw == mPwChk) {
+						$('#newpwChkResult').text('비밀번호 일치');
+					} else {
+						$('#newpwChkResult').html('<b>비밀번호 불일치</b>');
+					}
+				}); // new pw check
+			$('input[name="mEmail"]').keyup(
+				function() {
+					var patternMail = /^[a-zA-Z0-9_]+@[a-zA-Z0-9]+(\.[a-zA-Z]+){1,2}$/; // 메일 패턴
+					var mEmail = $(
+						'input[name="mEmail"]').val();
+						if (patternMail.test(mEmail)) {
+							$.ajax({
+								url : '${conPath}/emailConfirm.let',
+								type : 'post',
+								dataType : 'html',
+								data : "mEmail="+ mEmail,
+								success : function(data) {
+											$('#emailConfirmResult').html(data);
+										}
+							});//ajax
+						} else if (!mEmail) {
+							$('#emailConfirmResult').html(' &nbsp; ');
+						} else {
+							$('#emailConfirmResult').html('메일 형식을 지켜주세요');
+						}//if
+				});// mEmail keyup 이벤트
+			$('form').submit(function() {
+				var pwChkResult = $('#pwChkResult').text().trim();
+				var newpwChkResult = $('#newpwChkResult').text().trim();
+				var emailConfirmResult = $('#emailConfirmResult').text().trim();
+				if (pwChkResult != '확인') {
+					alert('비밀번호를 확인하세요');
+					$('input[name="oldmPw"]').focus();
+					return false;
+				}else if (newpwChkResult != '비밀번호 일치') {
+					alert('비밀번호를 확인하세요');
+					$('input[name="newmPw"]').focus();
+					return false;
+				} else if (emailConfirmResult != ''&& emailConfirmResult != '사용 가능한 메일입니다') {
+					alert('이메일을 확인하세요');
+					$('input[name="mEmail"]').focus();
+					return false;
+				}
+			});
+		});//mIdConfirm의 click이벤트
+	</script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
 	<div id="content_form">
-		<form action="${conPath }/modify.do" method="post">
+		<form action="${conPath }/modify.let" method="post">
 			<table>
 				<tr>
 					<td>

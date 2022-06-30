@@ -1,15 +1,16 @@
-package com.lec.mybag.qna.service;
+package com.lec.mybag.mybag.service;
 
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lec.mybag.dao.QnaBoardDao;
-import com.lec.mybag.dto.QnaBoardDto;
+import com.lec.mybag.dao.MyBagBoardDao;
+import com.lec.mybag.dto.MyBagBoardDto;
 import com.lec.mybag.service.Service;
 
-public class QnaBoardListService implements Service {
+public class MyBagBoardListService implements Service {
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		String pageNum = request.getParameter("pageNum");
@@ -21,26 +22,17 @@ public class QnaBoardListService implements Service {
 			}
 		}
 		int currentPage = Integer.parseInt(pageNum);
-		final int PAGESIZE=10, BLOCKSIZE=10;
+		final int PAGESIZE=6;
 		int startRow = (currentPage-1) * PAGESIZE +1;
 		int endRow   = startRow + PAGESIZE -1;
-		QnaBoardDao qDao = QnaBoardDao.getInstance();
-		ArrayList<QnaBoardDto> qnaboardList = qDao.qListBoard(startRow, endRow);
-		request.setAttribute("qnaboardList", qnaboardList);
-		int totCnt = qDao.getQnaBoardTotCnt(); // 글갯수
+		MyBagBoardDao bDao = MyBagBoardDao.getInstance();
+		ArrayList<MyBagBoardDto> mybagboardList = bDao.bListBoard(startRow, endRow);
+		request.setAttribute("mybagboardList", mybagboardList);
+		int totCnt = bDao.getMyBagBoardTotCnt(); // 글갯수
 		int pageCnt = (int)Math.ceil((double)totCnt/PAGESIZE);//페이지갯수
-		int startPage = ((currentPage-1)/BLOCKSIZE)*BLOCKSIZE+1;
-		int endPage = startPage + BLOCKSIZE - 1;
-		if(endPage>pageCnt) {
-			endPage = pageCnt;
-		}
-		request.setAttribute("BLOCKSIZE", BLOCKSIZE);
-		request.setAttribute("startPage", startPage);
-		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCnt", pageCnt);
-		request.setAttribute("totCnt", totCnt); // totCnt는 없으면 itemboardList.size()대용
+		request.setAttribute("totCnt", totCnt); // totCnt는 없으면 myBagboardList.size()대용
 		request.setAttribute("pageNum", currentPage);
 	}
-	
-}
 
+}

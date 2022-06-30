@@ -39,9 +39,9 @@ public class LikeMyBagDao {
 		}
 		return conn;
 	}
-
 	//(1) 좋아요 누르기
-	private void LikeUp(String mId, int bId) {
+	private int LikeUp(String mId, int bId) {
+		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO myBAGBOARD " + " (lID, mID, bId)" 
@@ -64,9 +64,11 @@ public class LikeMyBagDao {
 				System.out.println(e.getMessage());
 			}
 		}
+		return result;
 	}
 	//(2) 좋아요 취소하기
-	private void DisLike(String mId, int bId) {
+	private int DisLike(String mId, int bId) {
+		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "DELETE FROM LIKEmyBAG WHERE mID=? AND bID=?";
@@ -88,10 +90,10 @@ public class LikeMyBagDao {
 				System.out.println(e.getMessage());
 			}
 		}
+		return result;
 	}
 	//(3)탈퇴처리위함
 	public void AllDeleteLikeMyBag(String mId) {
-		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "DELETE FROM LikemyBAG WHERE MID = ?";
@@ -133,13 +135,11 @@ public class LikeMyBagDao {
 				int bId = rs.getInt("bId");
 				String bName = rs.getString("bName");
 				String bContent = rs.getString("bContent");
-				String bFilename1 = rs.getString("qFilename1");
-				String bFilename2 = rs.getString("qFilename2");
-				String bFilename3 = rs.getString("qFilename3");
+				String bFilename = rs.getString("qFilename");
 				int bHit = rs.getInt("bHit");
 				Timestamp bRdate = rs.getTimestamp("bRDate");
 				String bIp = rs.getString("bIp");
-				lDtos.add(new MyBagBoardDto(bId, mId, bName, bContent, bFilename1, bFilename2, bFilename3, bHit, bRdate, bIp));
+				lDtos.add(new MyBagBoardDto(bId, mId, bName, bContent, bFilename, bHit, bRdate, bIp));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

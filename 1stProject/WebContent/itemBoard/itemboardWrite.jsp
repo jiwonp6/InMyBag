@@ -44,10 +44,12 @@
 					<td><input type="file" name="iFilename"></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="submit" value="글쓰기" class="btn">
-						<input type="reset" value="취소" class="btn"> <input
-						type="button" value="목록" class="btn"
-						onclick="location.href='${conPath}/itemboardList.do'">
+					<td colspan="2">
+						<input type="submit" value="글쓰기" class="btn">
+						<input type="reset" value="취소" class="btn"> 
+						<input type="button" value="목록" class="btn" onclick="location.href='${conPath}/itemboardList.do'">
+					</td>
+				</tr>
 			</table>
 		</form>
 	</div>

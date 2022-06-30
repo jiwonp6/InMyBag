@@ -46,7 +46,7 @@ public class MyBagBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + " (SELECT ROWNUM RN, A.* FROM " + " (SELECT B.* FROM myBAGBOARD B "
-				+ " ORDER BY bGROUP DESC, bSTEP) A)" + " WHERE RN BETWEEN ? AND ?";
+				+ " ORDER BY bId DESC) A)" + " WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -58,13 +58,11 @@ public class MyBagBoardDao {
 				String mId = rs.getString("mId");
 				String bName = rs.getString("bName");
 				String bContent = rs.getString("bContent");
-				String bFilename1 = rs.getString("bFilename1");
-				String bFilename2 = rs.getString("bFilename2");
-				String bFilename3 = rs.getString("bFilename3");
+				String bFilename = rs.getString("bFilename");
 				int bHit = rs.getInt("bHit");
 				Timestamp bRdate = rs.getTimestamp("bRDate");
 				String bIp = rs.getString("bIp");
-				bDtos.add(new MyBagBoardDto(bId, mId, bName, bContent, bFilename1, bFilename2, bFilename3, bHit, bRdate, bIp));
+				bDtos.add(new MyBagBoardDto(bId, mId, bName, bContent, bFilename, bHit, bRdate, bIp));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -114,22 +112,20 @@ public class MyBagBoardDao {
 	}
 
 	// (3) 글쓰기(원글)
-	public int writeMyBagBoard(String mId, String bName, String bContent, String bFilename1, String bFilename2, String bFilename3, String bIp) {
+	public int writeMyBagBoard(String mId, String bName, String bContent, String bFilename, String bIp) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO myBAGBOARD " + " (bID, mID, bNAME, bCONTENT, bFILENAME1, bFILENAME2, bFILENAME3, bIP) " 
-					+ "		VALUES (myBAG_SEQ.NEXTVAL, ?, ?, ? , ?, ?, ?, ?)";
+		String sql = "INSERT INTO myBAGBOARD " + " (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) " 
+					+ "		VALUES (myBAG_SEQ.NEXTVAL, ?, ?, ? , ?, ?)";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mId);
 			pstmt.setString(2, bName);
 			pstmt.setString(3, bContent);
-			pstmt.setString(4, bFilename1);
-			pstmt.setString(5, bFilename2);
-			pstmt.setString(6, bFilename3);
-			pstmt.setString(7, bIp);
+			pstmt.setString(4, bFilename);
+			pstmt.setString(5, bIp);
 			result = pstmt.executeUpdate();
 			System.out.println(result == SUCCESS ? "myBAG게시판 글쓰기성공" : "myBAG게시판 글쓰기실패");
 		} catch (SQLException e) {
@@ -178,7 +174,7 @@ public class MyBagBoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT bID, mID, bNAME, bCONTENT, bFILENAME1, bFILENAME2, bFILENAME3, bHIT, bRDATE, bIP "
+		String sql = "SELECT bID, mID, bNAME, bCONTENT, bFILENAME, bHIT, bRDATE, bIP "
 				+ " FROM myBAGBOARD " + " WHERE bID=?";
 		try {
 			conn = getConnection();
@@ -189,13 +185,11 @@ public class MyBagBoardDao {
 				String mId = rs.getString("mId");
 				String bName = rs.getString("bName");
 				String bContent = rs.getString("bContent");
-				String bFilename1 = rs.getString("bFilename1");
-				String bFilename2 = rs.getString("bFilename2");
-				String bFilename3 = rs.getString("bFilename3");
+				String bFilename = rs.getString("bFilename");
 				int bHit = rs.getInt("bHit");
 				Timestamp bRdate = rs.getTimestamp("bRdate");
 				String bIp = rs.getString("bIp");
-				bDto = new MyBagBoardDto(bId, mId, bName, bContent, bFilename1,  bFilename2, bFilename3, bHit, bRdate, bIp);
+				bDto = new MyBagBoardDto(bId, mId, bName, bContent, bFilename,  bHit, bRdate, bIp);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -220,7 +214,7 @@ public class MyBagBoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT bID, mID, bNAME, bCONTENT, bFILENAME1, bFILENAME2, bFILENAME3, bHIT, bRDATE, bIP "
+		String sql = "SELECT bID, mID, bNAME, bCONTENT, bFILENAME, bHIT, bRDATE, bIP "
 				+ " FROM myBAGBOARD " + " WHERE bID=?";
 		try {
 			conn = getConnection();
@@ -231,13 +225,11 @@ public class MyBagBoardDao {
 				String mId = rs.getString("mId");
 				String bName = rs.getString("bName");
 				String bContent = rs.getString("bContent");
-				String bFilename1 = rs.getString("bFilename1");
-				String bFilename2 = rs.getString("bFilename2");
-				String bFilename3 = rs.getString("bFilename3");
+				String bFilename = rs.getString("bFilename");
 				int bHit = rs.getInt("bHit");
 				Timestamp bRdate = rs.getTimestamp("bRdate");
 				String bIp = rs.getString("bIp");
-				bDto = new MyBagBoardDto(bId, mId, bName, bContent, bFilename1, bFilename2, bFilename3, bHit, bRdate, bIp);
+				bDto = new MyBagBoardDto(bId, mId, bName, bContent, bFilename, bHit, bRdate, bIp);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -255,16 +247,14 @@ public class MyBagBoardDao {
 		}
 		return bDto;
 	}
-	// (6) 글 수정하기(bId, bName, bContent, bFILENAME1, bFILENAME2, bFILENAME3, bIp, bRDATE)
-	public int modifyMyBagBoard(int bId, String bName, String bContent, String bFilename1, String bFilename2, String bFilename3, String bIp) {
+	// (6) 글 수정하기(bId, bName, bContent, bFILENAME, bIp, bRDATE)
+	public int modifyMyBagBoard(int bId, String bName, String bContent, String bFilename, String bIp) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE myBAGBOARD SET bNAME = ?, " 
 				+ "                    bCONTENT = ?, "
-				+ "                    bFILENAME1 = ?, " 
-				+ "                    bFILENAME2 = ?, " 
-				+ "                    bFILENAME3 = ?, " 
+				+ "                    bFILENAME = ?, " 
 				+ "                    bRDATE = SYSDATE, "
 				+ "                    bIP = ? " 
 				+ "            WHERE bID = ?";
@@ -273,11 +263,9 @@ public class MyBagBoardDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bName);
 			pstmt.setString(2, bContent);
-			pstmt.setString(3, bFilename1);
-			pstmt.setString(4, bFilename2);
-			pstmt.setString(5, bFilename3);
-			pstmt.setString(6, bIp);
-			pstmt.setInt(7, bId);
+			pstmt.setString(3, bFilename);
+			pstmt.setString(4, bIp);
+			pstmt.setInt(5, bId);
 			result = pstmt.executeUpdate();
 			System.out.println(result == SUCCESS ? "myBAG글수정성공" : "myBAG글수정실패");
 		} catch (SQLException e) {
@@ -324,7 +312,6 @@ public class MyBagBoardDao {
 
 	// (8) 회원탈퇴 하기 전 회원이 쓴 글 모두 삭제 후 탈퇴
 	public void AllDeleteMyBagBoard(String mId) {
-		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "DELETE FROM myBAGBOARD WHERE MID = ?";
@@ -348,7 +335,6 @@ public class MyBagBoardDao {
 	}
 	// (9) 관리자 권한으로 회원글(글번호로) 삭제
 	public void DeleteMyBagBoard(String bId) {
-		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "DELETE FROM myBAGBOARD WHERE bID = ?";

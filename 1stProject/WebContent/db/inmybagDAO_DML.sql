@@ -161,26 +161,44 @@
 --◆◆◆myBAGBOARD◆◆◆
      --★INSERT MINI DATA
     INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
-        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'THISISMYBAG', null, '112.169.33.198');
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'THISISMYBAG', 'bag', null, '112.169.33.198');
+    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'MYBAG', 'bag!!!1', 'myBag.jpg', '112.169.33.198');
+    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'yes MYBAG', 'bag~~~', 'myBag.jpg', '112.169.33.198');
+    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'yes MYBAG2', 'bag2', null, '112.169.33.198');
+    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'yes MYBAG2', 'bag2', null, '112.169.33.198');
+    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'yes MYBAG2', 'bag2', null, '112.169.33.198');
+    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'yes MYBAG2', 'bag2', null, '112.169.33.198');
+    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'yes MYBAG2', 'bag2', null, '112.169.33.198');
+    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'yes MYBAG2', 'bag2', null, '112.169.33.198');
+    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'yes MYBAG2', 'bag2', null, '112.169.33.198');
     SELECT * FROM myBAGBOARD;
+    commit;
     --(1)LIST(startROW~endROW)
     SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT B.* FROM myBAGBOARD B ORDER BY bID DESC) A)
         WHERE RN BETWEEN 1 AND 3;
     --(2)COUNT myBAGBOARD
     SELECT COUNT(*) bCNT FROM myBAGBOARD;
     --(3)WRITE myBAGBOARD
-    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME1, bFILENAME2, bFILENAME3, bIP) 
-        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'THISISMYBAG', 'mybag', null, NULL, NULL, '112.169.33.198');
+    INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
+        VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'THISISMYBAG', 'bag', null, '112.169.33.198');
     --(4)HIT UP
     UPDATE myBAGBOARD SET bHIT = bHIT +1 WHERE bID='1';
     --(5)get myBAGBOARD DTO(for CONTENT)
     SELECT * FROM myBAGBOARD WHERE bID='2';
+    SELECT B.*, C.cCONTENT FROM myBAGBOARD B, myBAGCANVAS C WHERE B.bID=C.bID AND B.bID='3';
     --(6)MODIFY myBAGBOARD
     UPDATE myBAGBOARD SET bNAME = 'THISISMYBAG!!!',
                            bCONTENT = 'myBAG',
-                           bFILENAME1 = NULL,
-                           bFILENAME1 = NULL,
-                           bFILENAME1 = NULL,
+                           bFILENAME = NULL,
                            bRDATE = SYSDATE,
                            bIP = '112.169.33.198'
                         WHERE bID=2;
@@ -191,6 +209,11 @@
     --(8)ALL DELETE myBAGBOARD
     DELETE FROM myBAGBOARD WHERE mID = 'aaa';
     SELECT * FROM myBAGBOARD;
+--◆◆◆myBAGCANVAS◆◆◆ 
+    --★INSERT MINI DATA
+    INSERT INTO myBAGCANVAS (cID, bID, cX, cY, cCONTENT) 
+        VALUES (CANVAS_SEQ.NEXTVAL, 3, 1, 1, 'FROMCCANVAS');
+    SELECT * FROM myBAGCANVAS;
 --◆◆◆REPLYmyBAG◆◆◆ 
     --★INSERT MINI DATA
     INSERT INTO REPLYmyBAG (rID, mID, rCONTENT, rGROUP, rSTEP, rINDENT, rIP) 

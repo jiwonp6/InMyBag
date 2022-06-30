@@ -36,8 +36,8 @@
 		<section class="gnb">
 			<c:if test="${member eq null}">
 				<ul>
-					<li><a href="${conPath }/joinView.do">JOIN US</a></li>
-					<li><a href="${conPath }/loginView.do">LOGIN</a></li>
+					<li><a href="${conPath }/joinView.let">JOIN US</a></li>
+					<li><a href="${conPath }/loginView.let">LOGIN</a></li>
 				</ul>
 			</c:if>
 			<c:if test="${not empty member}">
@@ -48,8 +48,8 @@
 							<li><a>${member.mId }님</a></li>
 							<li><a href="${conPath }/uploadView.do">MY BAG</a></li>
 							<li><a href="${conPath }/likeyView.do">LIKEY!</a></li>
-							<li><a href="${conPath }/modifyView.do">MODIFY</a></li>
-							<li><a href="${conPath }/logout.do">LOGOUT</a></li>
+							<li><a href="${conPath }/modifyView.let">MODIFY</a></li>
+							<li><a href="${conPath }/logout.let">LOGOUT</a></li>
 						</ul>
 					</li>
 				</ul>

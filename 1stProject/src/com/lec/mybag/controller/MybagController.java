@@ -20,6 +20,8 @@ import com.lec.mybag.item.service.ItemBoardModifyViewService;
 import com.lec.mybag.item.service.ItemBoardReplyViewService;
 import com.lec.mybag.item.service.ItemBoardReplyService;
 import com.lec.mybag.item.service.ItemBoardWriteService;
+import com.lec.mybag.mybag.service.MyBagBoardListService;
+import com.lec.mybag.mybag.service.MyBagBoardWriteService;
 import com.lec.mybag.qna.service.QnaBoardContentService;
 import com.lec.mybag.qna.service.QnaBoardDeleteService;
 import com.lec.mybag.qna.service.QnaBoardListService;
@@ -62,54 +64,60 @@ public class MybagController extends HttpServlet {
 		String com     = uri.substring(conPath.length()); // 들어온 요청
 		String viewPage = null;
 		Service service = null;
-		if(com.equals("/main.do")) {
-			viewPage="main/main.jsp";
 		/* * * * * * * * * * *  * * * * * * * * * * * *
-		 * * * * * * * * * member 관련 요청  * * * * * * *
-		* * * * * * * * * * *  * * * * * * * * * * * * */
-		}else if(com.equals("/joinView.do")) { // 회원가입 화면
-			viewPage = "member/join.jsp";
-		}else if(com.equals("/idConfirm.do")) {
-			service = new MidConfirmService();
+		 * * * * * * * * * MyBagBoard 관련 요청  * * * * * * *
+		 * * * * * * * * * * *  * * * * * * * * * * * * */
+		if(com.equals("/main.do")) {	// "/mybagboardList.do"
+			service = new MyBagBoardListService();
 			service.execute(request, response);
-			viewPage = "member/idConfirm.jsp";
-		}else if(com.equals("/emailConfirm.do")) {
-			service = new MemailConfirmService();
+			viewPage = "mybagBoard/mybagboardList.jsp";
+			/* viewPage="main/main.jsp"; */
+		}else if(com.equals("/append.do")) {
+			service = new MyBagBoardListService();
 			service.execute(request, response);
-			viewPage = "member/emailConfirm.jsp";
-		}else if(com.equals("/join.do")) { // 회원가입 DB 처리
-			service = new MJoinService(); // execute메소드 : mId중복체크 후 회원가입
+			viewPage = "mybagBoard/append.jsp";
+		}else if(com.equals("/mybagboardWriteView.do")) {
+			viewPage = "mybagBoard/mybagboardWrite.jsp";
+		}else if(com.equals("/mybagboardWrite.do")) {
+			service = new MyBagBoardWriteService();
 			service.execute(request, response);
-			viewPage = "loginView.do";
+			viewPage = "mybagboardList.do";
 		}
-		else if(com.equals("/loginView.do")) { // 로그인 화면
-			viewPage = "member/login.jsp";
+		/*else if(com.equals("/qnaboardContent.do")) {
+			service = new QnaBoardContentService();
+			service.execute(request, response);
+			viewPage = "qnaBoard/qnaboardContent.jsp";
+		}else if(com.equals("/qnaboardModifyView.do")) {
+			service = new QnaBoardModifyViewService();
+			service.execute(request, response);
+			viewPage = "qnaBoard/qnaboardModify.jsp";
+		}else if(com.equals("/qnaboradModify.do")) {
+			service = new QnaBoardModifyService();
+			service.execute(request, response);
+			viewPage = "qnaboardList.do";
 		}
-		else if(com.equals("/login.do")) { // 로그인 DB 및 세션 처리
-			service = new MLoginService();
+		else if(com.equals("/qnaboardDelete.do")) {
+			service = new QnaBoardDeleteService();
 			service.execute(request, response);
-			viewPage = "main/main.jsp";
-		}else if(com.equals("/logout.do")) {//로그아웃 - 세션 날리기
-			service = new MLogoutService();
+			viewPage = "qnaboardList.do";
+		}else if(com.equals("/qnaboardReplyView.do")) {
+			service = new QnaBoardReplyViewService();
 			service.execute(request, response);
-			viewPage = "main/main.jsp";
-		}else if(com.equals("/modifyView.do")) { // 정보 수정 화면
-			viewPage = "member/modify.jsp";
-		}else if(com.equals("/modify.do")) { // DB에 정보 수정
-			service = new MModifyService();
+			viewPage = "qnaBoard/qnaboardReply.jsp";
+		}else if(com.equals("/qnaboardReply.do")) {
+			service = new QnaBoardReplyService();
 			service.execute(request, response);
-			viewPage = "main/main.jsp";
-		}else if(com.equals("/withdrawal.do")) { // 회원탈퇴
-			service = new MWithdrawalService();
-			service.execute(request, response);
-			viewPage = "main/main.jsp";	
-		}	
+			viewPage = "qnaboardList.do";
+		}*/
+		
+		
 		
 		/*else if(com.equals("/allView.do")) { // 회원목록가져오기
 			service = new MAllViewService();
 			service.execute(request, response);
 			viewPage = "member/mAllView.jsp";
 		}*/
+		
 		
 		
 		/* * * * * * * * * * *  * * * * * * * * * * * *
@@ -151,6 +159,68 @@ public class MybagController extends HttpServlet {
 			viewPage = "itemboardList.do";
 		}
 		/* * * * * * * * * * *  * * * * * * * * * * * *
+		 * * * * * * * * * NoticeBoard 관련 요청  * * * * * * *
+		* * * * * * * * * * *  * * * * * * * * * * * * */
+		/*else if(com.equals("/faqboardList.do")) {
+			service = new FaqBoardListService();
+			service.execute(request, response);
+			viewPage = "faqBoard/faqboardList.jsp";
+		}else if(com.equals("/qnaboardWriteView.do")) {
+			viewPage = "qnaBoard/qnaboardWrite.jsp";
+		}else if(com.equals("/qnaboardWrite.do")) {
+			service = new QnaBoardWriteService();
+			service.execute(request, response);
+			viewPage = "qnaboardList.do";
+		}else if(com.equals("/qnaboardContent.do")) {
+			service = new QnaBoardContentService();
+			service.execute(request, response);
+			viewPage = "qnaBoard/qnaboardContent.jsp";
+		}else if(com.equals("/qnaboardModifyView.do")) {
+			service = new QnaBoardModifyViewService();
+			service.execute(request, response);
+			viewPage = "qnaBoard/qnaboardModify.jsp";
+		}else if(com.equals("/qnaboradModify.do")) {
+			service = new QnaBoardModifyService();
+			service.execute(request, response);
+			viewPage = "qnaboardList.do";
+		}
+		else if(com.equals("/qnaboardDelete.do")) {
+			service = new QnaBoardDeleteService();
+			service.execute(request, response);
+			viewPage = "qnaboardList.do";
+		}*/
+		/* * * * * * * * * * *  * * * * * * * * * * * *
+		 * * * * * * * * * FAQBoard 관련 요청  * * * * * * *
+		* * * * * * * * * * *  * * * * * * * * * * * * */
+		else if(com.equals("/faqboardList.do")) {
+			service = new FaqBoardListService();
+			service.execute(request, response);
+			viewPage = "faqBoard/faqboardList.jsp";
+		}/*else if(com.equals("/qnaboardWriteView.do")) {
+			viewPage = "qnaBoard/qnaboardWrite.jsp";
+		}else if(com.equals("/qnaboardWrite.do")) {
+			service = new QnaBoardWriteService();
+			service.execute(request, response);
+			viewPage = "qnaboardList.do";
+		}else if(com.equals("/qnaboardContent.do")) {
+			service = new QnaBoardContentService();
+			service.execute(request, response);
+			viewPage = "qnaBoard/qnaboardContent.jsp";
+		}else if(com.equals("/qnaboardModifyView.do")) {
+			service = new QnaBoardModifyViewService();
+			service.execute(request, response);
+			viewPage = "qnaBoard/qnaboardModify.jsp";
+		}else if(com.equals("/qnaboradModify.do")) {
+			service = new QnaBoardModifyService();
+			service.execute(request, response);
+			viewPage = "qnaboardList.do";
+		}
+		else if(com.equals("/qnaboardDelete.do")) {
+			service = new QnaBoardDeleteService();
+			service.execute(request, response);
+			viewPage = "qnaboardList.do";
+		}*/
+		/* * * * * * * * * * *  * * * * * * * * * * * *
 		 * * * * * * * * * QNABoard 관련 요청  * * * * * * *
 		* * * * * * * * * * *  * * * * * * * * * * * * */
 		else if(com.equals("/qnaboardList.do")) {
@@ -189,37 +259,6 @@ public class MybagController extends HttpServlet {
 			service.execute(request, response);
 			viewPage = "qnaboardList.do";
 		}
-		/* * * * * * * * * * *  * * * * * * * * * * * *
-		 * * * * * * * * * FAQBoard 관련 요청  * * * * * * *
-		* * * * * * * * * * *  * * * * * * * * * * * * */
-		else if(com.equals("/faqboardList.do")) {
-			service = new FaqBoardListService();
-			service.execute(request, response);
-			viewPage = "faqBoard/faqboardList.jsp";
-		}/*else if(com.equals("/qnaboardWriteView.do")) {
-			viewPage = "qnaBoard/qnaboardWrite.jsp";
-		}else if(com.equals("/qnaboardWrite.do")) {
-			service = new QnaBoardWriteService();
-			service.execute(request, response);
-			viewPage = "qnaboardList.do";
-		}else if(com.equals("/qnaboardContent.do")) {
-			service = new QnaBoardContentService();
-			service.execute(request, response);
-			viewPage = "qnaBoard/qnaboardContent.jsp";
-		}else if(com.equals("/qnaboardModifyView.do")) {
-			service = new QnaBoardModifyViewService();
-			service.execute(request, response);
-			viewPage = "qnaBoard/qnaboardModify.jsp";
-		}else if(com.equals("/qnaboradModify.do")) {
-			service = new QnaBoardModifyService();
-			service.execute(request, response);
-			viewPage = "qnaboardList.do";
-		}
-		else if(com.equals("/qnaboardDelete.do")) {
-			service = new QnaBoardDeleteService();
-			service.execute(request, response);
-			viewPage = "qnaboardList.do";
-		}*/
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
