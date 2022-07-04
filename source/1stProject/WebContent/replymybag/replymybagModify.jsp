@@ -16,7 +16,6 @@
 	<jsp:include page="../main/header.jsp" />
 	<div id="content_form">
 		<form action="${conPath }/replymybagModify.do" method="post" >
-			<input type="hidden" name="rpageNum" value="${rpageNum }">
 			<input type="hidden" name="rId" value="${replymybag.rId }"> 
 			<table>
 				<caption>MyBag(${replymybag.bId } 번 글) 댓글</caption>

@@ -83,17 +83,90 @@ public class ItemBoardDao {
 		}
 		return iDtos;
 	}
-
 	// (2) 글갯수
-	public int getItemBoardTotCnt() {
+		public int getItemBoardTotCnt() {
+			int iCnt = 0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT COUNT(*) iCNT FROM ITEMBOARD";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				rs.next();
+				iCnt = rs.getInt(1);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return iCnt;
+		}
+	// 내 글목록(startRow부터 endRow까지) - 글번호, 작성자, ...
+		public ArrayList<ItemBoardDto> iMyListBoard(String mId, int startRow, int endRow) {
+			ArrayList<ItemBoardDto> iDtos = new ArrayList<ItemBoardDto>();
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT * FROM " + " (SELECT ROWNUM RN, A.* FROM " + " (SELECT I.* FROM ITEMBOARD I "
+					+ " WHERE mID=? ORDER BY iGROUP DESC, iSTEP) A)" + " WHERE RN BETWEEN ? AND ?";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mId);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					int iId = rs.getInt("iId");
+					String iTitle = rs.getString("iTitle");
+					String iContent = rs.getString("iContent");
+					String iFilename = rs.getString("iFilename");
+					int iHit = rs.getInt("iHit");
+					Timestamp iRdate = rs.getTimestamp("iRDate");
+					int iGroup = rs.getInt("iGroup");
+					int iStep = rs.getInt("iStep");
+					int iIndent = rs.getInt("iIndent");
+					String iIp = rs.getString("iIp");
+					iDtos.add(new ItemBoardDto(iId, mId, iTitle, iContent, iFilename, iHit, iRdate, iGroup, iStep, iIndent, iIp));
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return iDtos;
+		}
+	//  내글갯수
+	public int getMyiListTotCnt(String mId) {
 		int iCnt = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) iCNT FROM ITEMBOARD";
+		String sql = "SELECT COUNT(*) iCNT FROM ITEMBOARD WHERE mID=?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
 			rs = pstmt.executeQuery();
 			rs.next();
 			iCnt = rs.getInt(1);

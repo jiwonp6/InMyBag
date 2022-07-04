@@ -46,6 +46,7 @@ public class MyBagBoardWriteService implements Service {
 				}else {
 					request.setAttribute("mybagboardResult", "글쓰기 실패");
 				}
+				request.setAttribute("pageNum", mRequest.getParameter("pageNum"));
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());

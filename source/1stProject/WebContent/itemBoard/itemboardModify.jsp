@@ -21,17 +21,14 @@
 <body>
 	<jsp:include page="../main/header.jsp" />
 	<div id="content_form">
-		<form action="${conPath }/itemboradModify.do" method="post"
-			enctype="multipart/form-data">
-			<input type="hidden" name="pageNum" value="${param.pageNum }">
+		<form action="${conPath }/itemboradModify.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="iId" value="${itemboard.iId }"> 
 			<input type="hidden" name="dbFilename" value="${itemboard.iFilename }">
 			<table>
 				<caption>ITEM Q&A</caption>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="iTitle"
-						value="${itemboard.iTitle }" required="required" size="30"></td>
+					<td><input type="text" name="iTitle" value="${itemboard.iTitle }" required="required" size="30"></td>
 				</tr>
 				<tr>
 					<td>본문</td>
@@ -57,10 +54,7 @@
 				<tr>
 					<td colspan="2">
 						<input type="submit" value="수정" class="btn">
-						<input type="button" value="목록" class="btn"
-						onclick="location='${conPath}/itemboardList.do?pageNum=${param.pageNum }'">
-						<input type="reset" value="이전" class="btn"
-						onclick="history.back()">
+						<input type="reset" value="이전" class="btn" onclick="history.back()">
 					</td>
 				</tr>
 			</table>

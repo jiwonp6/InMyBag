@@ -21,7 +21,7 @@
 						} else {
 							$('#oldpwChkResult').html('<b>비밀번호 불일치</b>');
 						}
-					}); // new pw check
+					}); //pw check
 			$('input[name="newmPw"], input[name="mPwChk"]').keyup(
 				function() {
 					var newmPw = $('input[name="newmPw"]').val();
@@ -149,7 +149,7 @@
 					<td colspan="2">
 						<input type="submit" value="MODIFY" class="btn">
 						<input type="reset" value="RESET" class="btn">
-						<input type="button" value="회원탈퇴" onclick="location.href='${conPath}/withdrawal.do'" class="btn">	
+						<input type="button" value="회원탈퇴" onclick="location.href='${conPath}/withdrawalagreeView.let'" class="btn">	
 					</td>
 				</tr>
 				<tr>

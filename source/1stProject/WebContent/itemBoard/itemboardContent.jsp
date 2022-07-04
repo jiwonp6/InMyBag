@@ -49,12 +49,6 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-						 	<%-- <c:if test="${member.mId eq itemboard.mId }">
-						 		<button onclick="location='${conPath}/itemboardModifyView.do?iId=${itemboard.iId }&pageNum=${param.pageNum }'">수정</button>
-						 	</c:if>
-						 	<c:if test="${member.mId eq itemboard.mId or not empty admin}">
-						 		<button onclick="location='${conPath}/itemboardDelete.do?iId=${itemboard.iId }&pageNum=${param.pageNum }'">삭제</button>
-						 	</c:if> --%>
 						 	<button onclick="location='${conPath}/itemboardReplyView.do?iId=${itemboard.iId }&pageNum=${param.pageNum }'">REPLY</button>
 						 	<input type="button" value="LIST" class="btn"
 						 		onclick="location='${conPath}/itemboardList.do?pageNum=${param.pageNum }'">

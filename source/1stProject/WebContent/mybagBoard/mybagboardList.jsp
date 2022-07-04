@@ -14,7 +14,7 @@
     <script>
      	function fun(bId){
     	  if(!isNaN(bId)){
-				location.href = '${conPath}/mybagboardContent.do?bId='+bId+'&pageNum=${pageNum}';
+				location.href = '${conPath}/mybagboardContent.do?bId='+bId+'&pageNum='+Number($('.pageNum').last().val());
 			}
       	}
 	</script>
@@ -81,7 +81,7 @@
 			<c:if test="${not empty member or not empty admin }">
 				<a href="${conPath }/mybagboardWriteView.do">글쓰기</a> |
 			</c:if>
-			<a href="${conPath }/main.do">위로</a>
+			<a href="#top">위로</a>
 		</p>
 		<br>
 	</div>

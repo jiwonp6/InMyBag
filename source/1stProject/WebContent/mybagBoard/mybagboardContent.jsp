@@ -12,18 +12,18 @@
 	<script>
 	var rpageNum;
 	var bId = ${mybagboard.bId };
-	var rId = ${replymybag.rId };
+	/* var rId = ${replymybag.rId }; */
 	$(document).ready(function(){
 		var pageCnt = Number('${pageCnt}');
 		var totCnt = Number('${totCnt}');
 		if(totCnt<=2){
-			$('#plus').css('display','none');
+			$('.plus').css('display','none');
 		}
 		rpageNum = Number($('.rpageNum').last().val());
 		if(pageCnt == rpageNum){
-			$('#plus').css('display','none');
+			$('.plus').css('display','none');
 		}
-		$('#plus').click(function(){
+		$('.plus').click(function(){
 			rpageNum = Number($('.rpageNum').last().val());
 			if(isNaN(rpageNum)){
 				rpageNum=1;
@@ -37,26 +37,22 @@
 					$('#appendDiv').append(data);
 					rpageNum = Number($('.rpageNum').last().val());
 					if(pageCnt <= rpageNum){
-						$('#plus').css('display','none');
+						$('.plus').css('display','none');
 					}
 				}
 			});//ajax
 		});// 더보기 버튼
-		$('#dap').click(function(){
-			rpageNum = Number($('.rpageNum').last().val());
-			if(isNaN(rpageNum)){
-				rpageNum=1;
-			}
-			$.ajax({
-				url : '${conPath}/replymybagReplyView.do',
-				type : 'get',
-				dataType : 'html',
-				data : {"rpageNum":(rpageNum), "bId":(bId), "rId":(rId)},
-				success : function(data){
-					$('#replyReply').append(data);
-				}
-			});//ajax
-		});//답글버튼
+		$('.like').click(function(){
+			  var likeNum = Number('${like }');
+			  if(likeNum==0){
+				  $(this).attr('src', 'img/like.png');
+				  location.href='${conPath}/likemybagWrite.do?mId='+'${member.mId}&bId='+'${mybagboard.bId}';
+			  }else if(likeNum ==1){
+				  likeNum=0;
+				  $(this).attr('src', 'img/dlike.png');
+				  location.href='${conPath}/likemybagDelete.do?mId='+'${member.mId}&bId='+'${mybagboard.bId}';
+			  }
+		  });//좋아요버튼
 	});
 	</script>
 </head>
@@ -77,6 +73,14 @@
 				<c:if test="${empty mybagboard.bFilename }">
 					<p><img src="${conPath }/mybagBoardFileUp/noneImg.png" width="240" height="300"></p>
 				</c:if>
+			</div>
+			<div>
+				<c:if test="${like eq 0}">
+	            	<img src="${conPath }/img/dlike.png" class="like" width="20px" height="20px">  <!-- 안눌러진상태 -->
+	          	</c:if>
+	            <c:if test="${like eq 1}">
+		        	<img src="${conPath }/img/like.png" class="like" width="20px" height="20px"> <!-- 눌러진상태 -->
+			    </c:if>
 			</div>
 			<section class="table">
 				<table>
@@ -104,8 +108,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-						 	<input type="button" value="LIST" class="btn"
-						 		onclick="location='${conPath}/main.do?pageNum=${param.pageNum }'">
+							 <input type="button" value="LIST" class="btn" onclick="location='${conPath}/main.do'">
 						</td>
 					</tr>
 				</table>
@@ -117,6 +120,7 @@
 						<tr>
 							<td><input type="hidden" name="bId" value="${mybagboard.bId }"></td>
 							<td><input type="hidden" name="rpageNum" value="${rpageNum }"></td>
+							<td><input type="hidden" name="pageNum" value="${param.pageNum }"></td>
 							<td>${member.mId }</td>
 							<td>
 								<input type="text" name="rContent" placeholder="댓글입력창" required="required" class="reply" >
@@ -144,16 +148,11 @@
 									</c:forEach> ${replymybag.rContent }
 								</td>
 							</tr>
-							<tr>
-								<td colspan="3">
-									<button id="dap">답글</button>
-								</td>
-							</tr>
 						</table>
 						<div id="replyReply"></div>
 					</c:forEach>
 					<div id="appendDiv"></div>
-					<button id="plus">더보기</button>
+					<button class="plus">더보기</button>
 				</c:if>
 			</section>
 		</section>

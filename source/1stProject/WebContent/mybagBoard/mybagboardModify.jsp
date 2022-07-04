@@ -12,9 +12,7 @@
 <body>
 	<jsp:include page="../main/header.jsp" />
 	<div id="content_form">
-		<form action="${conPath }/mybagboradModify.do" method="post"
-			enctype="multipart/form-data">
-			<input type="hidden" name="pageNum" value="${param.pageNum }">
+		<form action="${conPath }/mybagboradModify.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="bId" value="${mybagboard.bId }"> 
 			<input type="hidden" name="dbFilename" value="${mybagboard.bFilename }">
 			<table>
@@ -48,10 +46,7 @@
 				<tr>
 					<td colspan="2">
 						<input type="submit" value="수정" class="btn">
-						<input type="button" value="목록" class="btn"
-							onclick="location='${conPath}/main.do?pageNum=${param.pageNum }'">
-						<input type="reset" value="이전" class="btn"
-							onclick="history.back()">
+						<input type="reset" value="이전" class="btn" onclick="history.back()">
 					</td>
 				</tr>
 			</table>

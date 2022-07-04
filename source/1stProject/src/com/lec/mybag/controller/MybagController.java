@@ -25,6 +25,9 @@ import com.lec.mybag.item.service.ItemBoardModifyViewService;
 import com.lec.mybag.item.service.ItemBoardReplyViewService;
 import com.lec.mybag.item.service.ItemBoardReplyService;
 import com.lec.mybag.item.service.ItemBoardWriteService;
+import com.lec.mybag.like.service.LikeMyBagCountService;
+import com.lec.mybag.like.service.LikeMyBagDeleteService;
+import com.lec.mybag.like.service.LikeMyBagWriteService;
 import com.lec.mybag.mybag.service.MyBagBoardContentService;
 import com.lec.mybag.mybag.service.MyBagBoardDeleteService;
 import com.lec.mybag.mybag.service.MyBagBoardListService;
@@ -59,6 +62,7 @@ import com.lec.mybag.service.MModifyService;
 import com.lec.mybag.service.MWithdrawalService;
 import com.lec.mybag.service.MemailConfirmService;
 import com.lec.mybag.service.MidConfirmService;
+import com.lec.mybag.service.MyBoardListService;
 import com.lec.mybag.service.Service;
 
 //Servlet implementation class MybagController
@@ -107,6 +111,10 @@ public class MybagController extends HttpServlet {
 		}else if(com.equals("/mybagboardContent.do")) {
 			service = new MyBagBoardContentService();
 			service.execute(request, response);
+			service = new ReplyMyBagListService();
+			service.execute(request, response);
+			service = new LikeMyBagCountService();
+			service.execute(request, response);
 			viewPage = "mybagBoard/mybagboardContent.jsp";
 		}else if(com.equals("/mybagboardModifyView.do")) {
 			service = new MyBagBoardModifyViewService();
@@ -115,11 +123,11 @@ public class MybagController extends HttpServlet {
 		}else if(com.equals("/mybagboradModify.do")) {
 			service = new MyBagBoardModifyService();
 			service.execute(request, response);
-			viewPage = "main.do";
+			viewPage = "myboardList.let";
 		}else if(com.equals("/mybagboardDelete.do")) {
 			service = new MyBagBoardDeleteService();
 			service.execute(request, response);
-			viewPage = "mybagboardList.do";
+			viewPage = "myboardList.let";
 		}
 		/* * * * * * * * * * *  * * * * * * * * * * * *
 		 * * * * * * * * * ReplyMyBag 관련 요청  * * * * * * *
@@ -139,26 +147,25 @@ public class MybagController extends HttpServlet {
 		}else if(com.equals("/replymybagModify.do")) {
 			service = new ReplyMyBagModifyService();
 			service.execute(request, response);
-			viewPage = "mybagboardContent.do";
+			viewPage = "myboardList.let";
 		}else if(com.equals("/replymybagDelete.do")) {
 			service = new ReplyMyBagDeleteService();
 			service.execute(request, response);
-			viewPage = "mybagboardContent.do";
+			viewPage = "myboardList.let";
 		}
 		
-		else if(com.equals("/replymybagReplyView.do")) {
-			service = new ReplyMyBagReplyViewService();
+		/* * * * * * * * * * *  * * * * * * * * * * * *
+		 * * * * * * * * * LikemyBag 관련 요청  * * * * * * *
+		 * * * * * * * * * * *  * * * * * * * * * * * * */
+		else if(com.equals("/likemybagWrite.do")) {
+			service = new LikeMyBagWriteService();
 			service.execute(request, response);
-			viewPage = "replymybag/replymybagReply.jsp";
-		}else if(com.equals("/replymybagReply.do")) {
-			service = new ReplyMyBagReplyService();
+			viewPage = "mybagboardContent.do";
+		}else if(com.equals("/likemybagDelete.do")) {
+			service = new LikeMyBagDeleteService();
 			service.execute(request, response);
 			viewPage = "mybagboardContent.do";
 		}
-		
-		
-		
-		
 		
 		/* * * * * * * * * * *  * * * * * * * * * * * *
 		 * * * * * * * * * ItemBoard 관련 요청  * * * * * * *
@@ -184,11 +191,11 @@ public class MybagController extends HttpServlet {
 		}else if(com.equals("/itemboradModify.do")) {
 			service = new ItemBoardModifyService();
 			service.execute(request, response);
-			viewPage = "itemboardList.do";
+			viewPage = "myboardList.let";
 		}else if(com.equals("/itemboardDelete.do")) {
 			service = new ItemBoardDeleteService();
 			service.execute(request, response);
-			viewPage = "itemboardList.do";
+			viewPage = "myboardList.let";
 		}else if(com.equals("/itemboardReplyView.do")) {
 			service = new ItemBoardReplyViewService();
 			service.execute(request, response);
@@ -282,12 +289,11 @@ public class MybagController extends HttpServlet {
 		}else if(com.equals("/qnaboradModify.do")) {
 			service = new QnaBoardModifyService();
 			service.execute(request, response);
-			viewPage = "qnaboardList.do";
-		}
-		else if(com.equals("/qnaboardDelete.do")) {
+			viewPage = "myboardList.let";
+		}else if(com.equals("/qnaboardDelete.do")) {
 			service = new QnaBoardDeleteService();
 			service.execute(request, response);
-			viewPage = "qnaboardList.do";
+			viewPage = "myboardList.let";
 		}else if(com.equals("/qnaboardReplyView.do")) {
 			service = new QnaBoardReplyViewService();
 			service.execute(request, response);
@@ -297,7 +303,6 @@ public class MybagController extends HttpServlet {
 			service.execute(request, response);
 			viewPage = "qnaboardList.do";
 		}
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

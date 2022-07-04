@@ -21,7 +21,7 @@ public class QnaBoardListService implements Service {
 			}
 		}
 		int currentPage = Integer.parseInt(pageNum);
-		final int PAGESIZE=10, BLOCKSIZE=10;
+		final int PAGESIZE=15, BLOCKSIZE=3;
 		int startRow = (currentPage-1) * PAGESIZE +1;
 		int endRow   = startRow + PAGESIZE -1;
 		QnaBoardDao qDao = QnaBoardDao.getInstance();

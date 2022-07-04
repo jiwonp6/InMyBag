@@ -154,7 +154,7 @@ public class FaqBoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO FAQBOARD " + " (fID, aID, fTITLE, fCONTENT, fFILENAME, fIP) "
-				+ " 	VALUES (FAQ_SEQ.NEXTVAL, ?, ?, ? , ?, " + "		FAQ_SEQ.CURRVAL, 0, 0, ?)";
+				+ " 	VALUES (FAQ_SEQ.NEXTVAL, ?, ?, ? , ?, ?)";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);

@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.lec.mybag.dto.ItemBoardDto;
 import com.lec.mybag.dto.LikemyBagDto;
 import com.lec.mybag.dto.MyBagBoardDto;
 import com.lec.mybag.dto.QnaBoardDto;
@@ -39,19 +40,19 @@ public class LikeMyBagDao {
 		}
 		return conn;
 	}
-	//(1) 좋아요 누르기
-	private int LikeUp(String mId, int bId) {
+
+	// (1) 좋아요 누르기
+	public int writeLikemybag(String mId, int bId) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO myBAGBOARD " + " (lID, mID, bId)" 
-				+ "		VALUES (LIKE_SEQ.NEXTVAL, ?, ?)";
+		String sql = "INSERT INTO LIKEmyBAG " + " (lID, mID, bId)" + "		VALUES (LIKE_SEQ.NEXTVAL, ?, ?)";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mId);
 			pstmt.setInt(2, bId);
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -66,8 +67,9 @@ public class LikeMyBagDao {
 		}
 		return result;
 	}
-	//(2) 좋아요 취소하기
-	private int DisLike(String mId, int bId) {
+
+	// (2) 좋아요 취소하기
+	public int deleteLikemybag(String mId, int bId) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -76,8 +78,8 @@ public class LikeMyBagDao {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mId);
-			pstmt.setInt(1, bId);
-			pstmt.executeUpdate();
+			pstmt.setInt(2, bId);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -92,7 +94,114 @@ public class LikeMyBagDao {
 		}
 		return result;
 	}
-	//(3)탈퇴처리위함
+
+	// 내 글목록(startRow부터 endRow까지) - 글번호, 작성자, ...
+	public ArrayList<MyBagBoardDto> getLikeMyBag(String member_mId, int startRow, int endRow) {
+		ArrayList<MyBagBoardDto> lDtos = new ArrayList<MyBagBoardDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT B.* FROM LIKEmyBAG L, myBAGBOARD B "
+				+ "    WHERE L.mID=? AND L.BID=B.BID ORDER BY lRDATE DESC) A) WHERE RN BETWEEN ? AND ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member_mId);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String mId = rs.getString("mId");
+				int bId = rs.getInt("bId");
+				String bName = rs.getString("bName");
+				String bContent = rs.getString("bContent");
+				String bFilename = rs.getString("bFilename");
+				int bHit = rs.getInt("bHit");
+				Timestamp bRdate = rs.getTimestamp("bRdate");
+				String bIp = rs.getString("bIp");
+				lDtos.add(new MyBagBoardDto(bId, mId, bName, bContent, bFilename, bHit, bRdate, bIp));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return lDtos;
+	}
+	// 내글갯수
+	public int getLikeMyBagTotCnt(String mId) {
+		int lCnt = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) lCNT FROM LIKEmyBAG WHERE mID=?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			rs = pstmt.executeQuery();
+			rs.next();
+			lCnt = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return lCnt;
+	}
+
+	//
+	public int countLikeMyBag(String mId, int bId) {
+		int like = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM LIKEmyBAG WHERE mID=? AND bID=?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			pstmt.setInt(2, bId);
+			rs = pstmt.executeQuery();
+			rs.next();
+			like = rs.getInt(1);
+			System.out.println(like);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return like;
+	}
+
+	// (3)탈퇴처리위함
 	public void AllDeleteLikeMyBag(String mId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -115,15 +224,16 @@ public class LikeMyBagDao {
 			}
 		}
 	}
-	//(4) 회원이 좋아요 누른 글만 가져오기
+
+	// (4) 회원이 좋아요 누른 글만 가져오기
 	public ArrayList<MyBagBoardDto> likeListBoard(String mId, int startRow, int endRow) {
 		ArrayList<MyBagBoardDto> lDtos = new ArrayList<MyBagBoardDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT B.* FROM myBAGBOARD B, LIKEmyBAG L" + 
-				"                                                    WHERE B.BID=L.LID AND L.MID=? ORDER BY lRDATE DESC) A)" + 
-				"        WHERE RN BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT B.* FROM myBAGBOARD B, LIKEmyBAG L"
+				+ "                                                    WHERE B.BID=L.LID AND L.MID=? ORDER BY lRDATE DESC) A)"
+				+ "        WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);

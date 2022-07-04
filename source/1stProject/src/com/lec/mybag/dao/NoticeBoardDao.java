@@ -116,7 +116,7 @@ public class NoticeBoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO NOTICEBOARD " + " (nID, aID, nTITLE, nCONTENT, nFILENAME, nIP) "
-				+ " 	VALUES (NOTICE_SEQ.NEXTVAL, ?, ?, ? , ?, " + "		NOTICE_SEQ.CURRVAL, 0, 0, ?)";
+				+ " 	VALUES (NOTICE_SEQ.NEXTVAL, ?, ?, ? , ?, ?)";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);

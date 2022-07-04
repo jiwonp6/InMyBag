@@ -46,8 +46,8 @@
 						<a>MY BAG</a>
 						<ul class="mybag_sub">
 							<li><a>${member.mId }님</a></li>
-							<li><a href="${conPath }/uploadView.do">MY BAG</a></li>
-							<li><a href="${conPath }/likeyView.do">LIKEY!</a></li>
+							<li><a href="${conPath }/myboardList.let">MY BAG</a></li>
+							<li><a href="${conPath }/likeyList.let">LIKEY!</a></li>
 							<li><a href="${conPath }/modifyView.let">MODIFY</a></li>
 							<li><a href="${conPath }/logout.let">LOGOUT</a></li>
 						</ul>
@@ -55,7 +55,7 @@
 				</ul>
 			</c:if>
 		</section>
-		<section class="logo">
+		<section class="logo" id="top">
 			<p>WHAT'S </p>
 			<p> &nbsp; &nbsp; IN</p>
 			<p> &nbsp; &nbsp; &nbsp; &nbsp; MY BAG</p>

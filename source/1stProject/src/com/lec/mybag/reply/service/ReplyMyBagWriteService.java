@@ -12,6 +12,7 @@ public class ReplyMyBagWriteService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		//String pageNum = request.getParameter("pageNum");
 		// mId, iTitle, iContent,  filename, iIp
 		HttpSession httpSession = request.getSession();
 		MemberDto member = (MemberDto)httpSession.getAttribute("member");
@@ -33,5 +34,4 @@ public class ReplyMyBagWriteService implements Service {
 			request.setAttribute("replymybagResult", "로그인 한 사람만 글쓸 수 있어요");
 		}
 	}
-
 }

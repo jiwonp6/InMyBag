@@ -115,6 +115,82 @@ public class ReplyMyBagDao {
 		return rCnt;
 	}
 
+	// 내글목록(mId로) - 글번호, 작성자이름, ...
+		public ArrayList<ReplyMyBagDto> rMyListBoard(String mId, int startRow, int endRow) {
+			ArrayList<ReplyMyBagDto> rDtos = new ArrayList<ReplyMyBagDto>();
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT * FROM " + " (SELECT ROWNUM RN, A.* FROM " + " (SELECT * FROM REPLYmyBAG "
+					+ " WHERE mID=? ORDER BY rGROUP DESC, rSTEP) A)" + " WHERE RN BETWEEN ? AND ?";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mId);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					int rId = rs.getInt("rId");
+					int bId = rs.getInt("bId");
+					String rContent = rs.getString("rContent");
+					Timestamp rRdate = rs.getTimestamp("rRDate");
+					int rGroup = rs.getInt("rGroup");
+					int rStep = rs.getInt("rStep");
+					int rIndent = rs.getInt("rIndent");
+					String rIp = rs.getString("rIp");
+					rDtos.add(new ReplyMyBagDto(rId, mId, bId, rContent, rRdate, rGroup, rStep, rIndent, rIp));
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return rDtos;
+		}
+		
+		
+		// (2) 글갯수
+		public int getMyrListTotCnt(String mId) {
+			int rCnt = 0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT COUNT(*) rCNT FROM REPLYmyBAG WHERE mID=?";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mId);
+				rs = pstmt.executeQuery();
+				rs.next();
+				rCnt = rs.getInt(1);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return rCnt;
+		}
+	
+	
 	// (3) 글쓰기(댓글)
 	public int writeReplyMyBag(String mId, int bId, String rContent, String rIp) {
 		int result = FAIL;

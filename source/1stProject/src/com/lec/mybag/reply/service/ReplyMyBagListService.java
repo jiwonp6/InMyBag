@@ -13,15 +13,15 @@ public class ReplyMyBagListService implements Service {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		int bId = Integer.parseInt(request.getParameter("bId"));
-		String pageNum = request.getParameter("pageNum");
-		if(pageNum==null) {
-			if(request.getAttribute("pageNum")==null) { // 글 수정이나 답변글처리시 mRequest를 사용하여서 request에 set함
-				pageNum = "1";
+		String rpageNum = request.getParameter("rpageNum");
+		if(rpageNum==null) {
+			if(request.getAttribute("rpageNum")==null) { // 글 수정이나 답변글처리시 mRequest를 사용하여서 request에 set함
+				rpageNum = "1";
 			}else {
-				pageNum = (String)request.getAttribute("pageNum");
+				rpageNum = (String)request.getAttribute("rpageNum");
 			}
 		}
-		int currentPage = Integer.parseInt(pageNum);
+		int currentPage = Integer.parseInt(rpageNum);
 		final int PAGESIZE=2;
 		int startRow = (currentPage-1) * PAGESIZE +1;
 		int endRow   = startRow + PAGESIZE -1;
@@ -32,7 +32,7 @@ public class ReplyMyBagListService implements Service {
 		int pageCnt = (int)Math.ceil((double)totCnt/PAGESIZE);//페이지갯수
 		request.setAttribute("pageCnt", pageCnt);
 		request.setAttribute("totCnt", totCnt); // totCnt는 없으면 replymybagList.size()대용
-		request.setAttribute("pageNum", currentPage);
+		request.setAttribute("rpageNum", currentPage);
 	}
 
 }

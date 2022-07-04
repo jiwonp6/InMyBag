@@ -114,7 +114,83 @@ public class QnaBoardDao {
 		}
 		return qCnt;
 	}
+	// 내글목록(startRow부터 endRow까지) - 글번호, 작성자이름, ...
+		public ArrayList<QnaBoardDto> qMyListBoard(String mId, int startRow, int endRow) {
+			ArrayList<QnaBoardDto> qDtos = new ArrayList<QnaBoardDto>();
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT * FROM " + " (SELECT ROWNUM RN, A.* FROM " + " (SELECT * FROM QNABOARD "
+					+ " WHERE mID=? ORDER BY qGROUP DESC, qSTEP) A)" + " WHERE RN BETWEEN ? AND ?";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mId);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					int qId = rs.getInt("qId");
+					String aId = rs.getString("aId");
+					String qTitle = rs.getString("qTitle");
+					String qContent = rs.getString("qContent");
+					String qFilename = rs.getString("qFilename");
+					int qHit = rs.getInt("qHit");
+					Timestamp qRdate = rs.getTimestamp("qRDate");
+					int qGroup = rs.getInt("qGroup");
+					int qStep = rs.getInt("qStep");
+					int qIndent = rs.getInt("qIndent");
+					String qIp = rs.getString("qIp");
+					qDtos.add(new QnaBoardDto(qId, aId, mId, qTitle, qContent, qFilename, qHit, qRdate, qGroup, qStep,
+							qIndent, qIp));
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return qDtos;
+		}
 
+		// 내글갯수
+		public int getMyqListTotCnt(String mId) {
+			int qCnt = 0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT COUNT(*) qCNT FROM QNABOARD WHERE mID=?";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mId);
+				rs = pstmt.executeQuery();
+				rs.next();
+				qCnt = rs.getInt(1);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return qCnt;
+		}
 	// (3) 글쓰기(원글)
 	public int writeQnaBoard(String mId, String qTitle, String qContent, String qFilename, String qIp) {
 		int result = FAIL;

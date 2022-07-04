@@ -1,8 +1,8 @@
 --query
---◆◆◆ADMIN◆◆◆
-    --★INSERT MINI DATA
-    INSERT INTO ADMIN (aID, aPW, aNAME, aKING) VALUES ('aKING', '111', '최고관리자이름', 1);
-    INSERT INTO ADMIN (aID, aPW, aNAME) VALUES ('aaa', '111', '박박박');
+--?��?��?��ADMIN?��?��?��
+    --?��INSERT MINI DATA
+    INSERT INTO ADMIN (aID, aPW, aNAME, aKING) VALUES ('aKING', '111', '최고�?리자?���?', 1);
+    INSERT INTO ADMIN (aID, aPW, aNAME) VALUES ('aaa', '111', '박박�?');
     SELECT * FROM ADMIN;
     --(1)LOGIN CHECK
     SELECT * FROM ADMIN WHERE aID='aaa' and aPW='111';
@@ -11,10 +11,10 @@
     --(3)aID CONFIRM
     SELECT * FROM ADMIN WHERE aID='aaa';
     --(4)JOIN ADMIN
-    INSERT INTO ADMIN (aID, aPW, aNAME) VALUES ('aaa', '111', '박박박');
+    INSERT INTO ADMIN (aID, aPW, aNAME) VALUES ('aaa', '111', '박박�?');
     --(5)MODIFY ADMIN
     UPDATE ADMIN SET aPW='111',
-                     aNAME='박'
+                     aNAME='�?'
             WHERE aID='aaa';
     COMMIT;
     --(6)WITHDRAWAL ADMIN
@@ -22,9 +22,9 @@
     ROLLBACK;
     --(7)aKING CHECK
     SELECT * FROM ADMIN WHERE aID='aKING' AND aKING=1;
---◆◆◆MEMBER◆◆◆
-    --★INSERT MINI DATA
-    INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL) VALUES ('aaa', '111', '박박박', '99-09-09', 'park@park.com');
+--?��?��?��MEMBER?��?��?��
+    --?��INSERT MINI DATA
+    INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL) VALUES ('aaa', '111', '박박�?', '99-09-09', 'park@park.com');
     SELECT * FROM MEMBER;
     --(1)LOGIN CHECK
     SELECT * FROM MEMBER WHERE mID='aaa' and mPW='111';
@@ -33,10 +33,10 @@
     --(3)mID CONFIRM
     SELECT * FROM MEMBER WHERE mID='aaa';
     --(4)JOIN MEMBER
-    INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL) VALUES ('aaa', '111', '박박박', '99-09-09', 'park@park.com');
+    INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL) VALUES ('aaa', '111', '박박�?', '99-09-09', 'park@park.com');
     --(5)MODIFY MEMBER
     UPDATE MEMBER SET mPW='111',
-                     mNAME='박',
+                     mNAME='�?',
                      mBIRTH='99-09-09',
                      mEMAIL='parkP@park.com'
             WHERE mID='aaa';
@@ -51,12 +51,12 @@
     ROLLBACK;
     --(9)mEMAIL CONFIRM
     SELECT * FROM MEMBER WHERE mEMAIL='parkP@park.com';
---◆◆◆FAQBOARD◆◆◆
+--?��?��?��FAQBOARD?��?��?��
     INSERT INTO FAQBOARD (fID, aID, fTITLE, fCONTENT, fFILENAME, fIP) 
         VALUES (FAQ_SEQ.NEXTVAL, 'aaa', 'FAQ!', 'answer', null, '112.169.33.198');
     SELECT * FROM FAQBOARD;
---◆◆◆NOTICEBOARD◆◆◆
-     --★INSERT MINI DATA
+--?��?��?��NOTICEBOARD?��?��?��
+     --?��INSERT MINI DATA
     INSERT INTO NOTICEBOARD (nID, aID, nTITLE, nCONTENT, nFILENAME, nIP) 
         VALUES (NOTICE_SEQ.NEXTVAL, 'aaa', 'NOTICE!', 'notice, notice', null, '112.169.33.198');
     SELECT * FROM NOTICEBOARD;
@@ -83,17 +83,19 @@
     --(7)DELETE NOTICEBOARD
     DELETE FROM NOTICEBOARD WHERE nID=1;
     ROLLBACK;
---◆◆◆QNABOARD◆◆◆
-     --★INSERT MINI DATA
+--?��?��?��QNABOARD?��?��?��
+     --?��INSERT MINI DATA
     INSERT INTO QNABOARD (qID, mID, qTITLE, qCONTENT, qFILENAME, qGROUP, qSTEP, qINDENT, qIP) 
         VALUES (QNA_SEQ.NEXTVAL, 'aaa', 'QNA!', 'qnaqna', null, QNA_SEQ.CURRVAL, 0, 0, '112.169.33.198');
     INSERT INTO QNABOARD (qID, mID, qTITLE, qCONTENT, qFILENAME, qGROUP, qSTEP, qINDENT, qIP) 
         VALUES (QNA_SEQ.NEXTVAL, 'aaa', 'QNAQNA', 'qnaqna2', null, QNA_SEQ.CURRVAL, 0, 0, '112.169.33.198');
-    SELECT * FROM QNABOARD;
+    SELECT * FROM QNABOARD where mid='aaa';
     commit;
     --(1)LIST(startROW~endROW)
-    SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT qID, NVL(mID, '관리자') mID, qTITLE, qCONTENT, qFILENAME, qGROUP, qSTEP, qINDENT, qIP FROM QNABOARD ORDER BY qGROUP DESC, qSTEP) A)
+    SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM QNABOARD ORDER BY qGROUP DESC, qSTEP) A)
         WHERE RN BETWEEN 1 AND 3;
+    SELECT * FROM  (SELECT ROWNUM RN, A.* FROM  (SELECT * FROM QNABOARD 
+					 WHERE mID='aaa' ORDER BY qGROUP DESC, qSTEP) A) WHERE RN BETWEEN 1 AND 5;
     --(2)COUNT QNABOARD
     SELECT COUNT(*) qCNT FROM QNABOARD;
     --(3)WRITE QNABOARD
@@ -122,14 +124,17 @@
         VALUES (QNA_SEQ.NEXTVAL, 'aaa', 'QNA_REPLY', 'replys', null, 1, 1, 1, '112.169.33.100');
    --(9)ALL DELETE QNABOARD
    DELETE FROM QNABOARD WHERE mID = 'aaa';
---◆◆◆ITEMBOARD◆◆◆
-     --★INSERT MINI DATA
+--?��?��?��ITEMBOARD?��?��?��
+     --?��INSERT MINI DATA
     INSERT INTO ITEMBOARD (iID, mID, iTITLE, iCONTENT, iFILENAME, iGROUP, iSTEP, iINDENT, iIP) 
-        VALUES (ITEM_SEQ.NEXTVAL, 'aaa', 'ITEM?', 'item', null, ITEM_SEQ.CURRVAL, 0, 0, '112.169.33.198');
+        VALUES (ITEM_SEQ.NEXTVAL, 'aa3', 'ITEM?', 'item', null, ITEM_SEQ.CURRVAL, 0, 0, '112.169.33.198');
     SELECT * FROM ITEMBOARD;
     --(1)LIST(startROW~endROW)
     SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT I.* FROM ITEMBOARD I ORDER BY iGROUP DESC, iSTEP) A)
         WHERE RN BETWEEN 1 AND 3;
+    SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT I.* FROM ITEMBOARD I WHERE mID='aa3' ORDER BY iGROUP DESC, iSTEP) A)
+        WHERE RN BETWEEN 1 AND 3;
+    SELECT * FROM ITEMBOARD WHERE ;
     --(2)COUNT ITEMBOARD
     SELECT COUNT(*) iCNT FROM ITEMBOARD;
     --(3)WRITE ITEMBOARD
@@ -158,8 +163,8 @@
         VALUES (QNA_SEQ.NEXTVAL, 'aaa', 'ITEM_REPLY', 'replys', null, 2, 1, 1, '112.169.33.100');
    --(9)ALL DELETE ITEMBOARD
    DELETE FROM ITEMBOARD WHERE mID = 'aaa';    
---◆◆◆myBAGBOARD◆◆◆
-     --★INSERT MINI DATA
+--?��?��?��myBAGBOARD?��?��?��
+     --?��INSERT MINI DATA
     INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
         VALUES (myBAG_SEQ.NEXTVAL, 'aaa', 'THISISMYBAG', 'bag', null, '112.169.33.198');
     INSERT INTO myBAGBOARD (bID, mID, bNAME, bCONTENT, bFILENAME, bIP) 
@@ -209,13 +214,13 @@
     --(8)ALL DELETE myBAGBOARD
     DELETE FROM myBAGBOARD WHERE mID = 'aaa';
     SELECT * FROM myBAGBOARD;
---◆◆◆myBAGCANVAS◆◆◆ 
-    --★INSERT MINI DATA
+--?��?��?��myBAGCANVAS?��?��?�� 
+    --?��INSERT MINI DATA
     INSERT INTO myBAGCANVAS (cID, bID, cX, cY, cCONTENT) 
         VALUES (CANVAS_SEQ.NEXTVAL, 3, 1, 1, 'FROMCCANVAS');
     SELECT * FROM myBAGCANVAS;
---◆◆◆REPLYmyBAG◆◆◆ 
-    --★INSERT MINI DATA
+--?��?��?��REPLYmyBAG?��?��?�� 
+    --?��INSERT MINI DATA
     INSERT INTO REPLYmyBAG (rID, mID, bID, rCONTENT, rGROUP, rSTEP, rINDENT, rIP) 
         VALUES (REPLY_SEQ.NEXTVAL, 'aaa', 13, 'reply~!', REPLY_SEQ.CURRVAL, 0, 0, '112.169.33.198');
     SELECT * FROM REPLYmyBAG;
@@ -247,10 +252,15 @@
         VALUES (REPLY_SEQ.NEXTVAL, 'aaa', 'REPLY_REPLY', 3, 1, 1, '112.169.33.100');
    --(8)ALL DELETE ITEMBOARD
    DELETE FROM REPLYmyBAG WHERE mID = 'aaa';
---◆◆◆LIKEmyBAG◆◆◆ 
+
+SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT B.* FROM LIKEmyBAG L, myBAGBOARD B 
+    WHERE L.mID='aaa' AND L.BID=B.BID ORDER BY lRDATE DESC) A) WHERE RN BETWEEN 1 AND 3;
+
+
+
+--?��?��?��LIKEmyBAG?��?��?�� 
     INSERT INTO LIKEmyBAG (LID, mID, bID) 
         VALUES (LIKE_SEQ.NEXTVAL, 'aaa', 1);
-    SELECT * FROM LIKEmyBAG;
     --(1)LIKE BAG
     INSERT INTO LIKEmyBAG (LID, mID, bID) 
         VALUES (LIKE_SEQ.NEXTVAL, 'aaa', 2);
