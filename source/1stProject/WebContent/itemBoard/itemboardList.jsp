@@ -26,7 +26,7 @@
 	<c:if test="${empty member }">
 		<script>
 			alert('로그인 이후 이용가능 합니다');
-			history.back();
+			location.href = "loginView.let";
 		</script>
 	</c:if>
 	<c:if test="${not empty itemboaredResult }">
@@ -39,10 +39,10 @@
 			<p>궁금했던 ITEM들의 정보를 교환하는 장소입니다.</p>
 		</header>
 		<section>
-			<div>
-			<c:if test="${not empty member }">
-				<a href="${conPath }/itemboardWriteView.do">글쓰기</a>
-			</c:if>
+			<div class="write">
+				<c:if test="${not empty member }">
+					<a href="${conPath }/itemboardWriteView.do">글쓰기</a>
+				</c:if>
 			</div>
 			<table>
 				<tr>

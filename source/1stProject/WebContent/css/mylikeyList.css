@@ -1,0 +1,36 @@
+@charset "UTF-8";
+article.mylikeyList {
+	width: 100%; 
+	margin: 30px auto 10px;
+}
+article.mylikeyList header{
+	margin:0 auto;
+	width:800px;
+	padding-left:30px;
+	height:50px;
+}
+article.mylikeyList footer{
+	padding:50px;
+	text-align: center;	
+}
+article.mylikeyList section div.table_wrap{
+	overflow: hidden;
+	width: 800px;
+	margin: 0 auto;
+}
+article.mylikeyList section.table_wrap table{
+	width: 250px;
+	padding:5px;
+	float:left;
+}
+article.mylikeyList section div.table_wrap > table:hover{
+	background-color: rgba( 255, 255, 255, 0.7 );
+	transform: scale(1.05);
+	cursor:pointer;
+}
+table tr td img{
+	border-radius:20px;
+}
+table tr:last-child > td {
+	text-align: right;
+}

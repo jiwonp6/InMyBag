@@ -5,11 +5,15 @@ article.mybagBoard {
 	margin: 30px auto 10px;
 }
 .hit_menu{
-	text-align:right;
-	padding-right: 450px;
-	position: fixed;
-	top: 330px;
-	right: 0;
+	float:right;
+	margin-right:300px;
+	width:120px;
+    border: 2px solid black;
+	border-radius:10px;
+    background-color: white ;
+    opacity:0.7;
+	text-align:center;
+	z-index: 99;
 }
 article.mybagBoard section div.table_wrap{
 	overflow: hidden;
@@ -20,6 +24,14 @@ article.mybagBoard section.table_wrap table{
 	width: 250px;
 	padding:5px;
 	float:left;
+}
+article.mybagBoard section div.table_wrap > table:hover{
+	background-color: rgba( 255, 255, 255, 0.7 );
+	transform: scale(1.05);
+	cursor:pointer;
+}
+table tr td img{
+	border-radius:20px;
 }
 table tr:last-child > td {
 	text-align: right;

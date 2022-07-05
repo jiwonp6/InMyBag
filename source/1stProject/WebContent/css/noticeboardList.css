@@ -7,6 +7,13 @@ article {
 	height:800px;
 	margin: 30px auto 0px;
 }
+article section.head_menu{
+	margin:0 auto;
+	height : 70px;
+}
+article section.head_menu h3{
+	text-align: center;
+}
 article header{
 	width:90%;
 	height:100px;
@@ -35,7 +42,7 @@ article section td, article section th {
 	text-align: center;
 	padding:5px; 
 }
-article footer{
+article footer.paging{
 	width:90%;
 	height:25px;
 	text-align:center;

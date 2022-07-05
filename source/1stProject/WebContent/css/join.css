@@ -41,12 +41,21 @@ p.textpool{
 p.agree{
 	text-align: right;
 }
-.btn{
-	width:150px;
-	hegiht:70px;
+input.btn,
+button.btn{
+	margin:10px auto;
+	margin-left:10px;
+	width:100px;
+	hegiht:30px;
 	border:none;
-	background-color: black;
+	border-radius:10px;
+	background-color: #737373;
 	color:white;
 	font-size:15px;
+	text-align:center;
 	radius:0;
+}
+input.btn:hover,
+button.btn:hover{
+	background-color: black;
 }

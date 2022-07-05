@@ -1,0 +1,65 @@
+@charset "UTF-8";
+*{
+	margin:0;
+	padding:0;
+}
+article{
+	width:100%;
+}
+article section.content{
+	width:800px;
+	margin:0 auto;
+}
+article section.content div.boardId{
+	padding: 30px 30px 0 30px;
+}
+article section.content div.boardId h3{
+	line-height: 30px;
+	padding-left:10px;
+}
+article section.content table{
+	margin:0 auto;
+	width:800px;
+	padding:0 40px;
+}
+article section.content table tr.boardwriter td{
+	text-align:right;
+	padding: 10px 30px;
+}
+article section.content table tr.content td{
+	text-align:left;
+	padding:10px;
+	height:300px;
+	border:1px solid gray;
+	font-size: 15px;
+	
+}
+article section.content table tr.file td{
+	text-align:right;
+	padding:10px 30px;
+}
+article section.content table tr.btn td{
+	text-align: right;
+	padding-right:30px;
+}
+input.btn,
+button.btn{
+	margin:0 auto;
+	width:70px;
+	hegiht:30px;
+	border:none;
+	border-radius:10px;
+	background-color: #737373;
+	color:white;
+	font-size:15px;
+	text-align:center;
+	radius:0;
+}
+input.btn:hover,
+button.btn:hover{
+	background-color: black;
+}
+
+
+
+

@@ -255,7 +255,7 @@
 
 SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT B.* FROM LIKEmyBAG L, myBAGBOARD B 
     WHERE L.mID='aaa' AND L.BID=B.BID ORDER BY lRDATE DESC) A) WHERE RN BETWEEN 1 AND 3;
-
+select * from likemybag;
 
 
 --?��?��?��LIKEmyBAG?��?��?�� 

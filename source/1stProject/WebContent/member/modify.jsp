@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="conPath/css/modify.css" rel="stylesheet">
+	<link href="${conPath }/css/modify.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
@@ -76,19 +76,16 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<div id="content_form">
+	<article>
+		<section class="field">
 		<form action="${conPath }/modify.let" method="post">
+			<div class="title">
+				<h2>${member.mId } 님</h2>
+				<h1>회원정보수정 페이지입니다</h1>
+				<h4>* 표시가 있는 사항은 필수 입력사항입니다</h4>
+				<h5>(반드시 입력해주세요)</h5>
+			</div>
 			<table>
-				<tr>
-					<td>
-						<div class="modify_comment">
-							<h2>회원님</h2>
-							<h1>회원정보수정을 진행해주세요</h1>
-							<h4>* 표시가 있는 사항은 필수 입력사항입니다</h4>
-							<h5>(반드시 입력해주세요)</h5>
-						</div>
-					</td>
-				</tr>
 				<tr>
 					<td>
 						<fieldset>
@@ -141,15 +138,11 @@
 						</fieldset>
 					</td>
 				</tr>
-				<tr></tr>
-				<tr>
-					<td colspan="2"><br> <br> <br></td>
-				</tr>
-				<tr>
+				<tr class="btn">
 					<td colspan="2">
-						<input type="submit" value="MODIFY" class="btn">
-						<input type="reset" value="RESET" class="btn">
-						<input type="button" value="회원탈퇴" onclick="location.href='${conPath}/withdrawalagreeView.let'" class="btn">	
+						<input type="submit" value="MODIFY" class="btn" style="height: 30px;">
+						<input type="reset" value="RESET" class="btn" style="height: 30px;">
+						<input type="button" value="회원탈퇴" onclick="location.href='${conPath}/withdrawalagreeView.let'" class="btn" style="height: 30px;">	
 					</td>
 				</tr>
 				<tr>
@@ -157,7 +150,8 @@
 				</tr>
 			</table>
 		</form>
-	</div>
+		</section>
+	</article>
 	<jsp:include page="../main/footer.jsp" />
 	
 </body>

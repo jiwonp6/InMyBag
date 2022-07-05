@@ -135,6 +135,8 @@ public class MybagController extends HttpServlet {
 		else if(com.equals("/replyappend.do")) {
 			service = new MyBagBoardContentService();
 			service.execute(request, response);
+			service = new ReplyMyBagListService();
+			service.execute(request, response);
 			viewPage = "replymybag/replyappend.jsp";
 		}else if(com.equals("/replymybagWrite.do")) {
 			service = new ReplyMyBagWriteService();

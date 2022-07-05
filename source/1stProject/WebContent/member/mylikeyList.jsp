@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="conPath/css/header.css" rel="stylesheet">
+	<link href="${conPath }/css/mylikeyList.css" rel="stylesheet">
 	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 	<style></style>
 	<script>
@@ -21,33 +21,34 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-	<header>
-		<h1>likey</h1>
-	</header>
-	<section class="table_wrap">
-		<c:if test="${totCnt==0 }">
-			<div class="none">
-				<p>등록된 글이 없습니다</p>
-			</div>
-		</c:if>
-		<c:if test="${totCnt!=0 }">
-			<div class="table_wrap">
-				<c:forEach items="${likemybagList }" var="likemybag">
-				<table onclick="fun(${likemybag.bId})">
-					<tr>
-						<td><img src="${conPath }/mybagBoardFileUp/${likemybag.bFilename}" width="250" height="300"></td>
-					</tr>
-					<tr>
-						<td>${likemybag.bName }(${likemybag.bHit })</td>
-					</tr>
-					<tr>
-						<td>${likemybag.mId }</td>
-					</tr>
-				</table>
-				</c:forEach>
-			</div>
-		</c:if>
-	</section>
+	<article class="mylikeyList">
+		<header>
+			<h1>Me likey!</h1>
+		</header>
+		<section class="table_wrap">
+			<c:if test="${totCnt==0 }">
+				<div class="none">
+					<p>등록된 글이 없습니다</p>
+				</div>
+			</c:if>
+			<c:if test="${totCnt!=0 }">
+				<div class="table_wrap">
+					<c:forEach items="${likemybagList }" var="likemybag">
+					<table onclick="fun(${likemybag.bId})">
+						<tr>
+							<td><img src="${conPath }/mybagBoardFileUp/${likemybag.bFilename}" width="250" height="300"></td>
+						</tr>
+						<tr>
+							<td>${likemybag.bName }(${likemybag.bHit })</td>
+						</tr>
+						<tr>
+							<td>${likemybag.mId }</td>
+						</tr>
+					</table>
+					</c:forEach>
+				</div>
+			</c:if>
+		</section>
 		<footer>
 			<c:if test="${startPage > BLOCKSIZE }">
 				[ <a href="${conPath }/likeyList.let?pageNum=${startPage-1 }">
@@ -66,6 +67,7 @@
 					다음 </a> ]
 			</c:if>
 		</footer>
+	</article>
 		<jsp:include page="../main/footer.jsp" />
 </body>
 </html>

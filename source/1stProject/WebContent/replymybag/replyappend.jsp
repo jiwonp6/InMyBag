@@ -14,28 +14,21 @@
 </head>
 <body>
 	<c:if test="${empty error }">
-		<table>
 			<c:forEach items="${replymybagList }" var="replymybag">
-						<table>
-							<tr>
-								<td>${replymybag.rId }</td>
-								<td>${replymybag.mId }</td>
-								<td class="left">
-									<c:forEach var="n" begin="1"
-										end="${replymybag.rIndent }">
-										<c:if test="${n==replymybag.rIndent }">└</c:if>
-										<c:if test="${n!=replymybag.rIndent }"> &nbsp; &nbsp; </c:if>
-									</c:forEach> ${replymybag.rContent }
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3">
-									<button id="dap">답글</button>
-								</td>
-							</tr>
-						</table>
+				<table class="reply">
+					<tr>
+						<th class="replyreply_mId"> ${replymybag.mId } </th>
+					</tr>
+					<tr>
+						<td class="left">
+							<c:forEach var="n" begin="1" end="${replymybag.rIndent }">
+							<c:if test="${n==replymybag.rIndent }">└</c:if>
+							<c:if test="${n!=replymybag.rIndent }"> &nbsp; &nbsp; </c:if>
+							</c:forEach> ${replymybag.rContent }
+						</td>
+					</tr>
+				</table>
 			</c:forEach>
-		</table>
 		<input type="hidden" name="rpageNum" class="rpageNum" value="${rpageNum }">
 	</c:if>
 </body>

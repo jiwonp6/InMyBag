@@ -13,22 +13,34 @@ tr{
 	text-align: left;
 	margin-top: 20px;
 }
-tr:nth-child(6)> td{
+tr.title td{
+	padding-bottom:40px;
+}
+tr.search> td{
 	text-align: right;
 }
-tr:nth-child(6)> td > a{
+tr.search> td > a{
 	text-decoration: none;
 	color: gray;
 }
 tr:last-child > td{
 	text-align:center;
 }
-.btn{
-	width:150px;
-	hegiht:70px;
+input.btn,
+button.btn{
+	margin:0 auto;
+	margin-left:10px;
+	width:100px;
+	hegiht:30px;
 	border:none;
-	background-color: black;
+	border-radius:10px;
+	background-color: #737373;
 	color:white;
 	font-size:15px;
+	text-align:center;
 	radius:0;
+}
+input.btn:hover,
+button.btn:hover{
+	background-color: black;
 }

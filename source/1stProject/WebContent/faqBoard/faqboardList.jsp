@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath }/css/qnaboardList.css" rel="stylesheet">
+	<link href="${conPath }/css/noticeboardList.css" rel="stylesheet">
 	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -33,18 +33,23 @@
 	</c:if>
 	<jsp:include page="../main/header.jsp"/>
 	<article>
+		<section class="head_menu">
+			<h3>
+				<a href="${conPath }/noticeboardList.do">NOTICE</a> |
+				<a href="${conPath }/faqboardList.do">FAQ</a> |
+				<a href="${conPath }/qnaboardList.do">QnA</a>
+			</h3>
+		</section>
 		<header>
-			<section>
-				<ul>
-					<li><a href="${conPath }/noticeboardList.do">NOTICE</a></li>
-					<li><a href="${conPath }/faqboardList.do">FAQ</a></li>
-					<li><a href="${conPath }/qnaboardList.do">QnA</a></li>
-				</ul>
-			</section>
 			<h1>FAQ BOARD</h1>
 			<p>자주 묻는 질문들</p>
 		</header>
 		<section class="faq">
+			<div class="write">
+				<c:if test="${not empty admin }">
+					<a href="${conPath }/faqboardWriteView.do">글쓰기</a>
+				</c:if>
+			</div>
 			<table>
 				<tr>
 					<td colspan="4">
@@ -81,7 +86,7 @@
 				</c:if>
 			</table>
 		</section>
-		<footer>
+		<footer class="paging">
 			<c:if test="${startPage > BLOCKSIZE }">
 				[ <a href="${conPath }/faqboardList.do?pageNum=${startPage-1 }"> 이전 </a> ]
 			</c:if>

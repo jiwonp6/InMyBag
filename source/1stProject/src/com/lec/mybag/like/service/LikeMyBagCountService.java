@@ -14,11 +14,15 @@ public class LikeMyBagCountService implements Service {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession httpSession = request.getSession();
 		MemberDto member = (MemberDto)httpSession.getAttribute("member");
-		String mId = member.getmId();
-		int bId = Integer.parseInt(request.getParameter("bId"));
-		LikeMyBagDao lDao = LikeMyBagDao.getInstance();
-		int result = lDao.countLikeMyBag(mId, bId);
-		request.setAttribute("like", result);
+		if(member == null) {
+			String mId = null;
+		}else {
+			String mId = member.getmId();
+			int bId = Integer.parseInt(request.getParameter("bId"));
+			LikeMyBagDao lDao = LikeMyBagDao.getInstance();
+			int result = lDao.countLikeMyBag(mId, bId);
+			request.setAttribute("like", result);
+		}
 	}
 
 }

@@ -8,40 +8,44 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<link href="${conPath }/css/mybagBoardContent.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script>
-	var rpageNum;
-	var bId = ${mybagboard.bId };
-	/* var rId = ${replymybag.rId }; */
-	$(document).ready(function(){
-		var pageCnt = Number('${pageCnt}');
-		var totCnt = Number('${totCnt}');
-		if(totCnt<=2){
-			$('.plus').css('display','none');
-		}
-		rpageNum = Number($('.rpageNum').last().val());
-		if(pageCnt == rpageNum){
-			$('.plus').css('display','none');
-		}
-		$('.plus').click(function(){
-			rpageNum = Number($('.rpageNum').last().val());
-			if(isNaN(rpageNum)){
-				rpageNum=1;
+		var rpageNum;
+		var bId = ${mybagboard.bId };
+		$(document).ready(function(){
+			var pageCnt = Number('${pageCnt}');
+			var totCnt = Number('${totCnt}');
+			if(totCnt<=2){
+				$('button').css('display','none');
 			}
-			$.ajax({
-				url : '${conPath}/replyappend.do',
-				type : 'get',
-				dataType : 'html',
-				data : {"rpageNum":(rpageNum+1), "bId":(bId)},
-				success : function(data){
-					$('#appendDiv').append(data);
-					rpageNum = Number($('.rpageNum').last().val());
-					if(pageCnt <= rpageNum){
-						$('.plus').css('display','none');
-					}
+			rpageNum = Number($('.rpageNum').last().val());
+			if(pageCnt == rpageNum){
+				$('button').css('display','none');
+			}
+			$('button').click(function(){
+				rpageNum = Number($('.rpageNum').last().val());
+				if(isNaN(rpageNum)){
+					rpageNum=1;
 				}
-			});//ajax
-		});// 더보기 버튼
+				$.ajax({
+					url : '${conPath}/replyappend.do',
+					type : 'get',
+					dataType : 'html',
+					data : {"rpageNum":(rpageNum+1), "bId":(bId)},
+					success : function(data){
+						$('#appendDiv').append(data);
+						rpageNum = Number($('.rpageNum').last().val());
+						if(pageCnt <= rpageNum){
+							$('button').css('display','none');
+						}
+					}
+				});//ajax
+			});// 더보기 버튼
+		});	
+	</script>
+	<script>
+	$(document).ready(function(){
 		$('.like').click(function(){
 			  var likeNum = Number('${like }');
 			  if(likeNum==0){
@@ -59,14 +63,19 @@
 <body>
 	<c:if test="${empty member }">
 		<script>
-			alert('로그인 후 이용가능합니다.');
-			history.back();
+			alert('로그인 이후 이용가능 합니다');
+			location.href = "loginView.let";
 		</script>
 	</c:if>
 	<jsp:include page="../main/header.jsp"/>
 	<article class="content">
 		<section>
-			<div>
+			<div class="boardId">
+				<hr>
+				<h3>No.${mybagboard.bId }(${mybagboard.mId})</h3>
+				<hr>
+			</div>
+			<div class="pic">
 				<c:if test="${not empty mybagboard.bFilename }">
 					<p><img src="${conPath }/mybagBoardFileUp/${mybagboard.bFilename}" width="240" height="300"></p>
 				</c:if>
@@ -74,72 +83,69 @@
 					<p><img src="${conPath }/mybagBoardFileUp/noneImg.png" width="240" height="300"></p>
 				</c:if>
 			</div>
-			<div>
+			<div class="likey">
 				<c:if test="${like eq 0}">
-	            	<img src="${conPath }/img/dlike.png" class="like" width="20px" height="20px">  <!-- 안눌러진상태 -->
+	            	<p><img src="${conPath }/img/dlike.png" class="like" width="20px" height="20px"></p>  <!-- 안눌러진상태 -->
 	          	</c:if>
 	            <c:if test="${like eq 1}">
-		        	<img src="${conPath }/img/like.png" class="like" width="20px" height="20px"> <!-- 눌러진상태 -->
+		        	<p><img src="${conPath }/img/like.png" class="like" width="20px" height="20px"></p> <!-- 눌러진상태 -->
 			    </c:if>
 			</div>
-			<section class="table">
-				<table>
-					<tr>
-						<td colspan="2">${mybagboard.bId }번 글(${mybagboard.mId})</td>
-					</tr>
-					<tr>
-						<td>제목</td>
-						<td>${mybagboard.bName }</td>
-					</tr>
-					<tr>
-						<td>본문</td>
-						<td><div class="bonmun"><pre>${mybagboard.bContent}</pre></div></td>
-					</tr>
-					<tr>
-						<th>첨부파일</th>
-						<td>
-							<c:if test="${not empty mybagboard.bFilename }">
-								<a href="${conPath }/mybagBoardFileUp/${mybagboard.bFilename}" target="_blank">${mybagboard.bFilename}</a>
-							</c:if>
-							<c:if test="${empty mybagboard.bFilename }">
-								 첨부파일없음
-							</c:if>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							 <input type="button" value="LIST" class="btn" onclick="location='${conPath}/main.do'">
-						</td>
-					</tr>
-				</table>
-			</section>
-			<section  class="reply">
+			<table class="content">
+				<tr>
+					<td style="font-weight: bold">${mybagboard.bName }</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="bonmun"><pre>${mybagboard.bContent}</pre></div>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: right; font-size: 10px;">
+						<c:if test="${not empty mybagboard.bFilename }">
+							<a href="${conPath }/mybagBoardFileUp/${mybagboard.bFilename}" target="_blank">${mybagboard.bFilename}</a>
+						</c:if>
+						<c:if test="${empty mybagboard.bFilename }">
+							 첨부파일없음
+						</c:if>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						 <input type="button" value="LIST" class="btn" onclick="location='${conPath}/main.do'">
+					</td>
+				</tr>
+			</table>
+			<section>
 				<form action="${conPath }/replymybagWrite.do" method="post">
-					<table>
-						<caption>댓글(${totCnt })</caption>
+					<table class="reply">
+						<caption><h4>댓글(${totCnt })</h4></caption>
 						<tr>
 							<td><input type="hidden" name="bId" value="${mybagboard.bId }"></td>
 							<td><input type="hidden" name="rpageNum" value="${rpageNum }"></td>
 							<td><input type="hidden" name="pageNum" value="${param.pageNum }"></td>
-							<td>${member.mId }</td>
+							<td class="reply_mId">${member.mId }</td>
 							<td>
-								<input type="text" name="rContent" placeholder="댓글입력창" required="required" class="reply" >
+								<input type="text" name="rContent" placeholder="댓글입력창" required="required" class="reply">
 							</td>
 							<td>
-								<input type="submit" value="댓글쓰기" class="btn">
+								<input type="submit" value="댓글" class="btn">
 							</td>
 						</tr>
 					</table>
 				</form>
 				<c:if test="${totCnt==0 }">
-					<tr><td colspan="6">등록된 댓글이 없습니다</td></tr>
+					<table class="reply">
+						<tr><td colspan="6">등록된 댓글이 없습니다</td></tr>
+					</table>
 				</c:if>
 				<c:if test="${totCnt!=0 }">
 					<c:forEach items="${replymybagList }" var="replymybag">
-						<table>
+						<table class="reply">
 							<tr>
-								<td>${replymybag.rId }</td>
-								<td>${replymybag.mId }</td>
+								<th class="replyreply_mId"> ${replymybag.mId } </th>
+							</tr>
+							<tr>
 								<td class="left">
 									<c:forEach var="n" begin="1"
 										end="${replymybag.rIndent }">
@@ -149,14 +155,17 @@
 								</td>
 							</tr>
 						</table>
-						<div id="replyReply"></div>
 					</c:forEach>
 					<div id="appendDiv"></div>
-					<button class="plus">더보기</button>
+					<div class="btn">
+						<button class="btn" >더보기</button>
+					</div>
 				</c:if>
 			</section>
 		</section>
 	</article>
-	<jsp:include page="../main/footer.jsp"/>
+	<footer style="margin-top:50px;">
+		<jsp:include page="../main/footer.jsp"/>
+	</footer>
 </body>
 </html>

@@ -16,10 +16,9 @@
 	<div id="content_form">
 		<form action="${conPath }/login.let" method="post">
 			<table>
-				<tr>
+				<tr class="title">
 					<td><h1>LOGIN</h1></td>
 				</tr>
-				<tr><td><br></td></tr>
 				<tr>
 					<td><input type="text" name="mId" required="required" 
 								placeholder="아이디" 
@@ -32,14 +31,14 @@
 					</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
-				<tr>
+				<tr class="search">
 					<td><a href="#">아이디/비밀번호 찾기</a></td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
 				<tr>
 					<td>
-						<input type="submit" value="LOGIN" class="btn">
-						<input type="button" value="JOIN US" class="btn"	onclick="location.href='${conPath}/joinView.let'">
+						<input type="submit" value="LOGIN" class="btn" style="height:30px;">
+						<input type="button" value="JOIN US" class="btn"	onclick="location.href='${conPath}/joinView.let'" style="height:30px;">
 					</td>
 				</tr>
 			</table>

@@ -3,12 +3,16 @@
     margin:0;
     padding:0;
 }
-div#content_form{
-	margin: 0 auto;
+article section.field{
+	width:800px;
+	margin:0 auto;
+}
+article section.field div.title{
+	padding:30px;
+	text-align: center;
 }
 table td {
 	margin: 0 auto;
-	border:1px solid red;
 }
 fieldset {
 	width:800px;
@@ -17,11 +21,6 @@ fieldset {
 div.wrap{
 	width:305px;
 	margin: 0 auto;
-}
-div.modify_comment h2{
-	background-color:red;
-	color:red;
-	border:12px solid red;
 }
 div#oldpwChkResult,
 div#pwChkResult,
@@ -33,12 +32,25 @@ p.id{
 	text-align: left;
 	font-size: 12px;
 }
-.btn{
-	width:150px;
-	hegiht:70px;
+tr.btn > td{
+	text-align:center;
+	padding-top:30px;
+}
+input.btn,
+button.btn{
+	margin:10px auto;
+	margin-left:10px;
+	width:100px;
+	hegiht:30px;
 	border:none;
-	background-color: black;
+	border-radius:10px;
+	background-color: #737373;
 	color:white;
 	font-size:15px;
+	text-align:center;
 	radius:0;
+}
+input.btn:hover,
+button.btn:hover{
+	background-color: black;
 }

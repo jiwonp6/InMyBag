@@ -8,14 +8,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath }/css/itemBoardContent.css" rel="stylesheet">
+	<link href="${conPath }/css/mybagBoardContent.css" rel="stylesheet">
 	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<article class="content">
 		<section>
-			<div>
+			<div class="boardId">
+				<hr>
+				<h3>No.${itemboard.iId }(${itemboard.mId})</h3>
+				<hr>
+			</div>
+			<div class="pic">
 				<c:if test="${not empty itemboard.iFilename }">
 					<p><img src="${conPath }/itemBoardFileUp/${itemboard.iFilename}" width="240" height="300"></p>
 				</c:if>
@@ -24,21 +29,15 @@
 				</c:if>
 			</div>
 			<section class="table">
-				<table>
+				<table class="content">
 					<tr>
-						<td colspan="2">${itemboard.iId }번 글(${itemboard.mId})</td>
+						<td style="font-weight: bold">Q : ${itemboard.iTitle }</td>
 					</tr>
 					<tr>
-						<td>제목</td>
-						<td>${itemboard.iTitle }</td>
-					</tr>
-					<tr>
-						<td>본문</td>
 						<td><div class="bonmun"><pre>${itemboard.iContent}</pre></div></td>
 					</tr>
 					<tr>
-						<th>첨부파일</th>
-						<td>
+						<td style="text-align: right; font-size: 10px;">
 							<c:if test="${not empty itemboard.iFilename }">
 								<a href="${conPath }/itemBoardFileUp/${itemboard.iFilename}" target="_blank">${itemboard.iFilename}</a>
 							</c:if>
@@ -48,10 +47,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
-						 	<button onclick="location='${conPath}/itemboardReplyView.do?iId=${itemboard.iId }&pageNum=${param.pageNum }'">REPLY</button>
-						 	<input type="button" value="LIST" class="btn"
-						 		onclick="location='${conPath}/itemboardList.do?pageNum=${param.pageNum }'">
+						<td class="btn" colspan="2">
+						 	<button class="btn" onclick="location='${conPath}/itemboardReplyView.do?iId=${itemboard.iId }&pageNum=${param.pageNum }'">REPLY</button>
+						 	<input type="button" value="LIST" class="btn" onclick="location='${conPath}/itemboardList.do?pageNum=${param.pageNum }'">
 						</td>
 					</tr>
 				</table>

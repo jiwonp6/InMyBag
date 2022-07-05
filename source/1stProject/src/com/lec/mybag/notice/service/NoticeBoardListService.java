@@ -22,7 +22,7 @@ public class NoticeBoardListService implements Service {
 			}
 		}
 		int currentPage = Integer.parseInt(pageNum);
-		final int PAGESIZE=10, BLOCKSIZE=15;
+		final int PAGESIZE=12, BLOCKSIZE=3;
 		int startRow = (currentPage-1) * PAGESIZE +1;
 		int endRow   = startRow + PAGESIZE -1;
 		NoticeBoardDao nDao = NoticeBoardDao.getInstance();

@@ -6,9 +6,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="${conPath }/css/itemboardList.css" rel="stylesheet">
+	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+	<style>
+		button.btn{
+			border:none;
+			border-radius:5px;
+			background-color: white;
+			color:black;
+			font-size:15px;
+		}
+		button.btn:hover{
+			background-color: lightgray;
+		}
+	</style>
 <script>
 	$(document).ready(function() {
 		$('.mybagboard').click(function() {
@@ -40,14 +53,14 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<article>
-		<header>
+	<article style="height:500px;">
+		<header style="height:50px;">
 			<h1>MyBag BOARD</h1>
 		</header>
-		<section>
+		<section style="height:300px;">
 			<table>
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<hr>
 					</td>
 				</tr>
@@ -56,6 +69,7 @@
 					<th>글제목</th>
 					<th>작성자</th>
 					<th>조회수</th>
+					<th>수정/삭제</th>
 				</tr>
 				<tr>
 					<td colspan="5">
@@ -69,7 +83,7 @@
 				</c:if>
 				<c:if test="${btotCnt!=0 }">
 					<c:forEach items="${mybagboardList }" var="mybagboard">
-						<tr class="mybagboard">
+						<tr>
 							<td>${mybagboard.bId }</td>
 							<td class="left">${mybagboard.bName } <!-- 글제목에 a태그를 걸지 말고 query로 tr을 클릭하면 상세보기 페이지로 가기 -->
 								<c:if test="${not empty mybagboard.bFilename }">
@@ -80,11 +94,9 @@
 							</td>
 							<td>${mybagboard.mId }</td>
 							<td>${mybagboard.bHit }</td>
-						</tr>
-						<tr class="left">
 							<td>
-						 		<button onclick="location='${conPath}/mybagboardModifyView.do?bId=${mybagboard.bId }'">수정</button>
-						 		<button onclick="location='${conPath}/mybagboardDelete.do?bId=${mybagboard.bId }'">삭제</button>
+						 		<button onclick="location='${conPath}/mybagboardModifyView.do?bId=${mybagboard.bId }'" class="btn">수정</button> /
+						 		<button onclick="location='${conPath}/mybagboardDelete.do?bId=${mybagboard.bId }'" class="btn">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>
@@ -110,31 +122,32 @@
 			</c:if>
 		</footer>
 	</article>
-	<article>
-		<header>
+	<article style="height:500px;">
+		<header style="height:50px;">
 			<h1>Reply myBag</h1>
 		</header>
-		<section>
+		<section style="height:300px;">
 			<table>
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<hr>
 					</td>
 				</tr>
 				<tr>
 					<th>글번호</th>
 					<th>mybag글번호</th>
-					<th>글제목</th>
+					<th>댓글내용</th>
 					<th>작성자</th>
+					<th>수정/삭제</th>
 				</tr>
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<hr>
 					</td>
 				</tr>
 				<c:if test="${rtotCnt==0 }">
 					<tr>
-						<td colspan="6">작성한 글이 없습니다</td>
+						<td colspan="5">작성한 글이 없습니다</td>
 					</tr>
 				</c:if>
 				<c:if test="${rtotCnt!=0 }">
@@ -144,11 +157,9 @@
 							<td>${replymybag.bId }</td>
 							<td class="left">${replymybag.rContent }</td>
 							<td>${replymybag.mId }</td>
-						</tr>
-						<tr class="left">
 							<td>
-						 		<button onclick="location='${conPath}/replymybagModifyView.do?rId=${replymybag.rId }'">수정</button>
-						 		<button onclick="location='${conPath}/replymybagDelete.do?rId=${replymybag.rId }'">삭제</button>
+						 		<button onclick="location='${conPath}/replymybagModifyView.do?rId=${replymybag.rId }'" class="btn">수정</button> /
+						 		<button onclick="location='${conPath}/replymybagDelete.do?rId=${replymybag.rId }'" class="btn">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>
@@ -174,14 +185,14 @@
 			</c:if>
 		</footer>
 	</article>
-	<article>
-		<header>
+	<article style="height:500px;">
+		<header style="height:50px;">
 			<h1>ITEM BOARD</h1>
 		</header>
-		<section>
+		<section style="height:300px;">
 			<table>
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<hr>
 					</td>
 				</tr>
@@ -190,6 +201,7 @@
 					<th>글제목</th>
 					<th>작성자</th>
 					<th>조회수</th>
+					<th>수정/삭제</th>
 				</tr>
 				<tr>
 					<td colspan="5">
@@ -198,7 +210,7 @@
 				</tr>
 				<c:if test="${itotCnt==0 }">
 					<tr>
-						<td colspan="6">작성한 글이 없습니다</td>
+						<td colspan="5">작성한 글이 없습니다</td>
 					</tr>
 				</c:if>
 				<c:if test="${itotCnt!=0 }">
@@ -217,12 +229,9 @@
 								</c:if></td>
 							<td>${itemboard.mId }</td>
 							<td>${itemboard.iHit }</td>
-							
-						</tr>
-						<tr class="left">
 							<td>
-						 		<button onclick="location='${conPath}/itemboardModifyView.do?iId=${itemboard.iId }'">수정</button>
-						 		<button onclick="location='${conPath}/itemboardDelete.do?iId=${itemboard.iId }'">삭제</button>
+						 		<button onclick="location='${conPath}/itemboardModifyView.do?iId=${itemboard.iId }'" class="btn">수정</button> /
+						 		<button onclick="location='${conPath}/itemboardDelete.do?iId=${itemboard.iId }'" class="btn">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>
@@ -248,14 +257,14 @@
 			</c:if>
 		</footer>
 	</article>
-	<article>
-		<header>
+	<article style="height:500px;">
+		<header style="height:50px;">
 			<h1>QnA BOARD</h1>
 		</header>
-		<section>
+		<section style="height:300px;">
 			<table>
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<hr>
 					</td>
 				</tr>
@@ -264,9 +273,10 @@
 					<th>글제목</th>
 					<th>작성자</th>
 					<th>조회수</th>
+					<th>수정/삭제</th>
 				</tr>
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<hr>
 					</td>
 				</tr>
@@ -281,18 +291,14 @@
 							<td>${qnaboard.qId }</td>
 							<td class="left">${qnaboard.qTitle } <!-- 글제목에 a태그를 걸지 말고 query로 tr을 클릭하면 상세보기 페이지로 가기 -->
 								<c:if test="${not empty qnaboard.qFilename }">
-									<img
-										src="https://cdn-icons-png.flaticon.com/512/5088/5088374.png"
-										width="10">
+									<img src="https://cdn-icons-png.flaticon.com/512/5088/5088374.png" width="10">
 								</c:if>
 							</td>
 							<td>${qnaboard.mId }</td>
 							<td>${qnaboard.qHit }</td>
-						</tr>
-						<tr class="left">
 							<td>
-						 		<button onclick="location='${conPath}/qnaboardModifyView.do?qId=${qnaboard.qId }'">수정</button>
-						 		<button onclick="location='${conPath}/qnaboardDelete.do?qId=${qnaboard.qId }'">삭제</button>
+						 		<button onclick="location='${conPath}/qnaboardModifyView.do?qId=${qnaboard.qId }'" class="btn">수정</button> / 
+						 		<button onclick="location='${conPath}/qnaboardDelete.do?qId=${qnaboard.qId }'" class="btn">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>

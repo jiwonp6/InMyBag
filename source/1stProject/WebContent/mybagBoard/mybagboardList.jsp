@@ -46,6 +46,31 @@
 			});
 		});
 	</script>	
+	<style>
+    .hmFixed {
+        position: fixed;
+        top: 35px;
+        right:0;
+      }
+    </style>
+    <script>
+      $( document ).ready( function() {
+        var jbOffset = $( '.hit_menu' ).offset();
+        $( window ).scroll( function() {
+          if ( $( document ).scrollTop() > jbOffset.top ) {
+            $( '.hit_menu' ).addClass( 'hmFixed' );
+          }
+          else {
+            $( '.hit_menu' ).removeClass( 'hmFixed' );
+          }
+        });
+      } );
+    </script>
+	
+	<script>
+	
+	
+	</script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>

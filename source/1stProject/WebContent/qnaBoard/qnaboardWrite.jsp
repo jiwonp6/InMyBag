@@ -8,48 +8,41 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="conPath/css/header.css" rel="stylesheet">
+	<link href="${conPath }/css/write2.css" rel="stylesheet">
 	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-	<style>
-	#content_form {
-		width: 800px;
-		height: 400px;
-		margin: 100px auto 0px;
-	}
-	</style>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		$(document).ready(function() {
-		});
-	</script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<div id="content_form">
+	<article class="write">
+	<section>
 		<form action="${conPath }/qnaboardWrite.do" method="post" enctype="multipart/form-data">
+			<div class="title">
+				<h2> Q&A </h2>
+			</div>
 			<table>
-				<caption>Q&A</caption>
 				<tr>
-					<td>제목</td>
-					<td><input type="text" name="qTitle" required="required"
-						size="30"></td>
+					<td class="id">제목</td>
+					<td><input type="text" name="qTitle" required="required" size="30" class="qTitle"></td>
 				</tr>
 				<tr>
-					<td>본문</td>
+					<td class="id">본문</td>
 					<td><textarea name="qContent" rows="3" cols="32"></textarea></td>
 				</tr>
 				<tr>
-					<td>첨부파일</td>
-					<td><input type="file" name="qFilename"></td>
+					<td colspan="2" style="text-align: right;"><input type="file" name="qFilename"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<input type="submit" value="글쓰기" class="btn">
 						<input type="reset" value="취소" class="btn"> 
 						<input type="button" value="목록" class="btn" onclick="location.href='${conPath}/qnaboardList.do'">
+					</td>
+				</tr>
 			</table>
 		</form>
-	</div>
+	</section>
+	</article>
 	<jsp:include page="../main/footer.jsp" />
 </body>
 </html>

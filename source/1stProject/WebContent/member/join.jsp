@@ -123,7 +123,7 @@
 					</td>
 				</tr>
 				<tr class="privacy">
-					<td colspan="2">
+					<td>
 						<fieldset>
 							<legend>이용약관</legend>
 							<p class="textpool">
@@ -139,7 +139,7 @@
 				</tr>
 				<tr></tr>
 				<tr class="privacy">
-					<td colspan="2">
+					<td>
 						<fieldset>
 							<legend>개인정보 이용약관</legend>
 							<p class="textpool">
@@ -154,20 +154,20 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td>
 					<br>
 					<br>
 					<br>
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2">
-						<input type="submit" value="JOIN US" class="btn">
-						<input type="button" value="LOGIN" class="btn" onclick="location.href='${conPath}/loginView.let'">
+				<tr class="submit">
+					<td style="text-align: center;">
+						<input type="submit" value="JOIN US" class="btn" style="height: 30px;">
+						<input type="button" value="LOGIN" class="btn" onclick="location.href='${conPath}/loginView.let'" style="height: 30px;">
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td>
 					<br>
 					<br>
 					<br>

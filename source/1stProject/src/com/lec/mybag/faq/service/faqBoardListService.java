@@ -22,7 +22,7 @@ public class faqBoardListService implements Service {
 			}
 		}
 		int currentPage = Integer.parseInt(pageNum);
-		final int PAGESIZE=15, BLOCKSIZE=3;
+		final int PAGESIZE=12, BLOCKSIZE=3;
 		int startRow = (currentPage-1) * PAGESIZE +1;
 		int endRow   = startRow + PAGESIZE -1;
 		FaqBoardDao iDao = FaqBoardDao.getInstance();
