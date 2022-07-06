@@ -490,5 +490,29 @@ public class QnaBoardDao {
 			}
 		}
 	}
+	//관리자 탈퇴전
+	public void AllDeleteQnaBoard2(String aId) {
+		int result = FAIL;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM QNABOARD WHERE aID = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, aId);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
 
 }

@@ -23,7 +23,7 @@
 			<table>
 				<tr>
 					<td class="id">제목</td>
-					<td><input type="text" name="qTitle" required="required" size="30" class="qTitle"></td>
+					<td><input type="text" name="qTitle" class="title" required="required" size="30"></td>
 				</tr>
 				<tr>
 					<td class="id">본문</td>

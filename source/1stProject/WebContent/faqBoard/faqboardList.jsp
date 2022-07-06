@@ -22,12 +22,6 @@
 	</script>
 </head>
 <body>
-	<c:if test="${empty member }">
-		<script>
-			alert('로그인 이후 이용가능 합니다');
-			history.back();
-		</script>
-	</c:if>
 	<c:if test="${not empty faqboaredResult }">
 		<script>alert('${faqboaredResult}');</script>
 	</c:if>

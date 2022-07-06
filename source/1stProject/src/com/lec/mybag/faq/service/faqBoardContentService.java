@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lec.mybag.dao.FaqBoardDao;
 import com.lec.mybag.dto.FaqBoardDto;
-import com.lec.mybag.service.Service;
+import com.lec.mybag.member.service.Service;
 
 public class faqBoardContentService implements Service {
 

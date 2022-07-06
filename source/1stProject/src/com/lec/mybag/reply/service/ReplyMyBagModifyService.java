@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lec.mybag.dao.ReplyMyBagDao;
-import com.lec.mybag.service.Service;
+import com.lec.mybag.member.service.Service;
 
 public class ReplyMyBagModifyService implements Service {
 

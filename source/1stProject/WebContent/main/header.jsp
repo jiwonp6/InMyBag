@@ -33,8 +33,8 @@
 </head>
 <body>
 	<header>
-		<section class="gnb">
-			<c:if test="${member eq null}">
+		<section class="gnb"  id="top">
+			<c:if test="${member eq null && admin eq null}">
 				<ul>
 					<li><a href="${conPath }/joinView.let">JOIN US</a></li>
 					<li><a href="${conPath }/loginView.let">LOGIN</a></li>
@@ -54,8 +54,24 @@
 					</li>
 				</ul>
 			</c:if>
+			<c:if test="${not empty admin }">
+				<ul>
+					<li class="mybag">
+						<a>관리자</a>
+						<ul class="mybag_sub">
+							<li><a>${admin.aId }님</a></li>
+							<li><a href="${conPath }/allView.let">회원관리</a></li>
+							<c:if test="${admin.aKing eq 1 }">
+								<li><a href="${conPath }/allAdminView.let">관리자관리</a></li>
+							</c:if>
+							<li><a href="${conPath }/adminmodifyView.let">MODIFY</a></li>
+							<li><a href="${conPath }/adminlogout.let">LOGOUT</a></li>
+						</ul>
+					</li>
+				</ul>
+			</c:if>
 		</section>
-		<section class="logo" id="top">
+		<section class="logo">
 			<p>WHAT'S </p>
 			<p> &nbsp; &nbsp; IN</p>
 			<p> &nbsp; &nbsp; &nbsp; &nbsp; MY BAG</p>

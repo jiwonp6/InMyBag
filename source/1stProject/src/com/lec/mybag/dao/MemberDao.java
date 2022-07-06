@@ -38,6 +38,72 @@ public class MemberDao {
 		}
 		return conn;
 	}
+	//회원검색
+	public ArrayList<MemberDto> searchMember(String search_mId, int startRow, int endRow){
+		ArrayList<MemberDto> sch_member = new ArrayList<MemberDto>();
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;
+		ResultSet         rs    = null;
+		String sql = "SELECT * FROM (SELECT ROWNUM RN, A.* FROM " 
+				 +     "         (select * from member where mId like '%'||?||'%' ORDER BY mRDATE DESC) A)" 
+				 +     "  WHERE RN BETWEEN ? AND ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, search_mId);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String mId = rs.getString("mId");
+				String mPw = rs.getString("mPw");
+				String mName = rs.getString("mName");
+				Date   mBirth = rs.getDate("mBirth");
+				String mEmail = rs.getString("mEmail");
+				Timestamp mRdate = rs.getTimestamp("mRdate");
+				sch_member.add(new MemberDto(mId, mPw, mName, mBirth, mEmail, mRdate));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(rs    != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn  != null) conn.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return sch_member;
+	}
+	//검색된 회원수
+	public int getSearchMemberTotCnt(String search_mId) {
+		int totCnt = 0;
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;
+		ResultSet         rs    = null;
+		String sql = "SELECT COUNT(*) FROM MEMBER where mId like '%'||?||'%'";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, search_mId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				totCnt = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(rs    != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn  != null) conn.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return totCnt;
+	}
 	// (1) 로그인 체크
 	public int loginCheck(String mId, String mPw) {
 		int result = LOGIN_FAIL;
@@ -181,7 +247,7 @@ public class MemberDao {
 			pstmt.setString(5, member.getmId());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()+"왜실패하냐ㅠ");
 		}finally {
 			try {
 				if(pstmt != null) pstmt.close();

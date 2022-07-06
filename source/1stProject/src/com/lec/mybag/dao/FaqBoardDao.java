@@ -252,7 +252,7 @@ public class FaqBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT fID, aID, fTITLE, fCONTENT, fFILENAME, fHIT, fRDATE, fIP " + " FROM FAQBOARD "
-				+ " WHERE fID=?";
+					+ " WHERE fID=?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -347,4 +347,28 @@ public class FaqBoardDao {
 		}
 		return result;
 	}
+	// (10) 회원탈퇴 하기 전 회원이 쓴 글 모두 삭제 후 탈퇴
+		public void AllDeleteFaqBoard(String aId) {
+			int result = FAIL;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = "DELETE FROM FAQBOARD WHERE aID = ?";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, aId);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
 }

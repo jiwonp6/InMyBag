@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.lec.mybag.dao.NoticeBoardDao;
 import com.lec.mybag.dto.AdminDto;
-import com.lec.mybag.service.Service;
+import com.lec.mybag.member.service.Service;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 

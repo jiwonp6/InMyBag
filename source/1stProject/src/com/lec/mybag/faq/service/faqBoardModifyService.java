@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lec.mybag.dao.FaqBoardDao;
-import com.lec.mybag.service.Service;
+import com.lec.mybag.member.service.Service;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -21,7 +21,7 @@ public class faqBoardModifyService implements Service {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// 파일첨부 로직 + 파라미터들 받아 DB에 join
-		String path = request.getRealPath("itemBoardFileUp");
+		String path = request.getRealPath("faqBoardFileUp");
 		int maxSize = 1024*1024*10; // 최대업로드 사이즈는 10M
 		String fFilename = "", dbFilename = null;
 		try {

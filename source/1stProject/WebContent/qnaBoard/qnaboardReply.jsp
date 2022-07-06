@@ -8,24 +8,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="conPath/css/header.css" rel="stylesheet">
+	<link href="${conPath }/css/write2.css" rel="stylesheet">
 	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-	<style>
-	#content_form {
-		width: 800px;
-		height: 400px;
-		margin: 100px auto 0px;
-	}
-	</style>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		$(document).ready(function() {
-		});
-	</script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<div id="content_form">
+	<article class="write">
+	<section>
 		<form action="${conPath }/qnaboardReply.do" method="post" enctype="multipart/form-data">
 			<!-- reply.do시 필요한 원글 정보 : qGroup, qStep, qIndent
 			                              지금 입력할 답변글 : qId, qTitle, qContent, pageNum -->
@@ -33,20 +22,20 @@
 			<input type="hidden" name="qStep" value="${originQnaBoard.qStep }">
 			<input type="hidden" name="qIndent" value="${originQnaBoard.qIndent }"> 
 			<input type="hidden" name="pageNum" value="${param.pageNum }">
+			<div class="title">
+				<h2> ${originQnaBoard.qId } 글 답변 </h2>
+			</div>
 			<table>
-				<caption>${originQnaBoard.qId }번글의답변쓰기 폼</caption>
 				<tr>
-					<td>제목</td>
-					<td><input type="text" name="qTitle" required="required"
-						size="30"></td>
+					<td class="id">제목</td>
+					<td><input type="text" name="qTitle" class="title" required="required" size="30"></td>
 				</tr>
 				<tr>
-					<td>본문</td>
+					<td class="id">본문</td>
 					<td><textarea name="qContent" rows="3" cols="32"></textarea></td>
 				</tr>
 				<tr>
-					<td>첨부파일</td>
-					<td><input type="file" name="qFilename"></td>
+					<td colspan="2" style="text-align: right;"><input type="file" name="qFilename"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -55,7 +44,8 @@
 						<input type="button" value="목록" class="btn" onclick="location.href='${conPath}/qnaboardList.do'">
 			</table>
 		</form>
-	</div>
+	</section>
+	</article>
 	<jsp:include page="../main/footer.jsp" />
 </body>
 </html>

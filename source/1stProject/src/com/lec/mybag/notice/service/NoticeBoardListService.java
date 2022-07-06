@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lec.mybag.dao.NoticeBoardDao;
 import com.lec.mybag.dto.NoticeBoardDto;
-import com.lec.mybag.service.Service;
+import com.lec.mybag.member.service.Service;
 
 public class NoticeBoardListService implements Service {
 

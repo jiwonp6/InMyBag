@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lec.mybag.dao.QnaBoardDao;
 import com.lec.mybag.dto.QnaBoardDto;
-import com.lec.mybag.service.Service;
+import com.lec.mybag.member.service.Service;
 
 public class QnaBoardContentService implements Service {
 

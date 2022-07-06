@@ -74,7 +74,13 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-<!-- main으로 오기 전 처리사항 -->
+	<!-- main으로 오기 전 처리사항 -->
+	<c:if test="${not empty loginErrorMsg }">
+		<script>
+			alert('${loginErrorMsg}');
+			history.back();
+		</script>
+	</c:if>
 	<c:if test="${not empty mybagboardResult }">
 		<script>alert('${mybagboardResult}');</script>
 	</c:if>
@@ -89,13 +95,13 @@
 			alert('${modifyResult }');
 		</script>
 	</c:if>
-	<c:if test="${withdrawalResult eq '회원탈퇴가 실패되었습니다' }">
+	<c:if test="${withdrawalResult eq '회원탈퇴가 실패되었습니다' or withdrawalResult eq '관리자탈퇴가 실패되었습니다' }">
 		<script>
 			alert('${withdrawalResult }');
 			history.back();
 		</script>
 	</c:if>
-	<c:if test="${withdrawalResult eq '회원탈퇴가 성공되었습니다' }">
+	<c:if test="${withdrawalResult eq '회원탈퇴가 성공되었습니다' or withdrawalResult eq '관리자탈퇴가 성공되었습니다' }">
 		<script>
 			alert('${withdrawalResult }');
 		</script>
@@ -103,7 +109,7 @@
 <article class="mybagBoard">
 	<div>
 		<p class="hit_menu">
-			<c:if test="${not empty member or not empty admin }">
+			<c:if test="${not empty member}">
 				<a href="${conPath }/mybagboardWriteView.do">글쓰기</a> |
 			</c:if>
 			<a href="#top">위로</a>

@@ -1,9 +1,12 @@
 package com.lec.mybag.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -11,6 +14,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.lec.mybag.dto.AdminDto;
+import com.lec.mybag.dto.MemberDto;
 
 public class AdminDao {
 	public static final int EXISTENT = 0;
@@ -187,9 +191,10 @@ public class AdminDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, admin.getaPw());
 			pstmt.setString(2, admin.getaName());
+			pstmt.setString(3, admin.getaId());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()+"수정이 안되네");
 		} finally {
 			try {
 				if (pstmt != null)
@@ -197,7 +202,7 @@ public class AdminDao {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				System.out.println(e.getMessage()+"수정X");
 			}
 		}
 		return result;
@@ -261,5 +266,133 @@ public class AdminDao {
 		}
 		return result;
 	}
+	
+	//관리자검색
+		public ArrayList<AdminDto> searchAdmin(String search_aId, int startRow, int endRow){
+			ArrayList<AdminDto> sch_admin = new ArrayList<AdminDto>();
+			Connection        conn  = null;
+			PreparedStatement pstmt = null;
+			ResultSet         rs    = null;
+			String sql = "SELECT * FROM (SELECT ROWNUM RN, A.* FROM " 
+					 +     "         (SELECT * FROM ADMIN WHERE aID LIKE '%'||?||'%' ORDER BY aKING DESC, aID) A)" 
+					 +     "  WHERE RN BETWEEN ? AND ?";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, search_aId);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					String aId = rs.getString("aId");
+					String aPw = rs.getString("aPw");
+					String aName = rs.getString("aName");
+					int aKing = rs.getInt("aKing");
+					sch_admin.add(new AdminDto(aId, aPw, aName, aKing));
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}finally {
+				try {
+					if(rs    != null) rs.close();
+					if(pstmt != null) pstmt.close();
+					if(conn  != null) conn.close();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return sch_admin;
+		}
+		//검색된 관리자수
+		public int getSearchAdminTotCnt(String search_aId) {
+			int totCnt = 0;
+			Connection        conn  = null;
+			PreparedStatement pstmt = null;
+			ResultSet         rs    = null;
+			String sql = "SELECT COUNT(*) FROM ADMIN where aId like '%'||?||'%'";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, search_aId);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					totCnt = rs.getInt(1);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}finally {
+				try {
+					if(rs    != null) rs.close();
+					if(pstmt != null) pstmt.close();
+					if(conn  != null) conn.close();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return totCnt;
+		}
+		// (6) 관리자리스트(top-N구문)
+		public ArrayList<AdminDto> allAdmin(int startRow, int endRow){
+			ArrayList<AdminDto> admins = new ArrayList<AdminDto>();
+			Connection        conn  = null;
+			PreparedStatement pstmt = null;
+			ResultSet         rs    = null;
+			String sql = "SELECT * FROM (SELECT ROWNUM RN, A.* FROM " 
+					 +     "         (SELECT * FROM ADMIN ORDER BY aKING DESC, aID) A)" 
+					 +     "  WHERE RN BETWEEN ? AND ?";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					String aId = rs.getString("aId");
+					String aPw = rs.getString("aPw");
+					String aName = rs.getString("aName");
+					int aKing = rs.getInt("aKing");
+					admins.add(new AdminDto(aId, aPw, aName, aKing));
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}finally {
+				try {
+					if(rs    != null) rs.close();
+					if(pstmt != null) pstmt.close();
+					if(conn  != null) conn.close();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return admins;
+		}
+		// (7) 관리자수
+		public int getAdminTotCnt() {
+			int totCnt = 0;
+			Connection        conn  = null;
+			PreparedStatement pstmt = null;
+			ResultSet         rs    = null;
+			String sql = "SELECT COUNT(*) FROM ADMIN";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					totCnt = rs.getInt(1);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}finally {
+				try {
+					if(rs    != null) rs.close();
+					if(pstmt != null) pstmt.close();
+					if(conn  != null) conn.close();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return totCnt;
+		}
+	
 
 }

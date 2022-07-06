@@ -1,4 +1,4 @@
-package com.lec.mybag.service;
+package com.lec.mybag.member.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package com.lec.mybag.service;
+package com.lec.mybag.member.service;
 
 import java.sql.Date;
 
@@ -16,7 +16,7 @@ public class MModifyService implements Service {
 		try {
 			String mId = request.getParameter("mId");
 			String mPw = "";
-			if(request.getParameter("newmPw")==null) {
+			if(request.getParameter("newmPw").equals("")) {
 				mPw=request.getParameter("oldmPw");
 			}else {
 				mPw=request.getParameter("newmPw");

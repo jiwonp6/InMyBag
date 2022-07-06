@@ -1,4 +1,4 @@
-package com.lec.mybag.service;
+package com.lec.mybag.member.service;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,7 @@ import com.lec.mybag.dao.ItemBoardDao;
 import com.lec.mybag.dao.MyBagBoardDao;
 import com.lec.mybag.dao.QnaBoardDao;
 import com.lec.mybag.dao.ReplyMyBagDao;
+import com.lec.mybag.dto.AdminDto;
 import com.lec.mybag.dto.ItemBoardDto;
 import com.lec.mybag.dto.MemberDto;
 import com.lec.mybag.dto.MyBagBoardDto;
@@ -22,7 +23,13 @@ public class MyBoardListService implements Service {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession httpSession = request.getSession();
 		MemberDto member = (MemberDto)httpSession.getAttribute("member");
-		String mId = member.getmId(); // 로그인 한 사람의 mId
+		AdminDto admin = (AdminDto)httpSession.getAttribute("admin");
+		String mId = "";
+		if(member!=null) {
+			mId = member.getmId(); // 로그인 한 사람의 mId
+		}else if(admin != null) {
+			mId = request.getParameter("mId");
+		}
 		//mybagboard
 		String bpageNum = request.getParameter("bpageNum");
 		if(bpageNum==null) {
@@ -142,7 +149,6 @@ public class MyBoardListService implements Service {
 		request.setAttribute("qpageCnt", qpageCnt);
 		request.setAttribute("qtotCnt", qtotCnt); // totCnt는 없으면 itemboardList.size()대용
 		request.setAttribute("qpageNum", qcurrentPage);
-		
 	}
 
 }

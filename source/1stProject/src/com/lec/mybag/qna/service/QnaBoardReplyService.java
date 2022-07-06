@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.lec.mybag.dao.QnaBoardDao;
 import com.lec.mybag.dto.AdminDto;
-import com.lec.mybag.service.Service;
+import com.lec.mybag.member.service.Service;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -23,7 +23,7 @@ public class QnaBoardReplyService implements Service {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// 파일첨부 로직 + 파라미터들 받아 DB에 join
-		String path = request.getRealPath("itemBoardFileUp");
+		String path = request.getRealPath("qnaBoardFileUp");
 		int maxSize = 1024*1024*10; // 최대업로드 사이즈는 10M
 		String qFilename = "";
 		try {
@@ -31,22 +31,26 @@ public class QnaBoardReplyService implements Service {
 			Enumeration<String> params = mRequest.getFileNames();
 			String param = params.nextElement();
 			qFilename = mRequest.getFilesystemName(param);
-			// mId, qTitle, qContent,  filename, qIp
+			// aId, qTitle, qContent,  filename, qIp
 			HttpSession httpSession = request.getSession();
-			String aId = ((AdminDto)httpSession.getAttribute("admin")).getaId();
-			String qTitle = mRequest.getParameter("iTitle");
-			String qContent = mRequest.getParameter("iContent");
-			String qIp = request.getRemoteAddr();
-			int qGroup = Integer.parseInt(mRequest.getParameter("qGroup"));
-			int qStep = Integer.parseInt(mRequest.getParameter("qStep"));
-			int qIndent = Integer.parseInt(mRequest.getParameter("qIndent"));
-			QnaBoardDao qDao = QnaBoardDao.getInstance();
-			int result = qDao.replyQnaBoard(aId, qTitle, qContent, qFilename, qIp, qGroup, qStep, qIndent);
-			// joinMember결과에 따라 적절히 request.setAttribute
-			if(result == QnaBoardDao.SUCCESS) { // 회원가입 진행
-				request.setAttribute("qnaboaredResult", "답글쓰기 성공");
-			}else {
-				request.setAttribute("qnaboaredResult", "답글쓰기 실패");
+			AdminDto admin = (AdminDto)httpSession.getAttribute("admin");
+			System.out.println(admin);
+			if(admin!=null) {
+				String aId = admin.getaId();
+				String qTitle = mRequest.getParameter("qTitle");
+				String qContent = mRequest.getParameter("qContent");
+				String qIp = request.getRemoteAddr();
+				int qGroup = Integer.parseInt(mRequest.getParameter("qGroup"));
+				int qStep = Integer.parseInt(mRequest.getParameter("qStep"));
+				int qIndent = Integer.parseInt(mRequest.getParameter("qIndent"));
+				QnaBoardDao qDao = QnaBoardDao.getInstance();
+				int result = qDao.replyQnaBoard(aId, qTitle, qContent, qFilename, qIp, qGroup, qStep, qIndent);
+				// joinMember결과에 따라 적절히 request.setAttribute
+				if(result == QnaBoardDao.SUCCESS) { // 회원가입 진행
+					request.setAttribute("qnaboaredResult", "답글쓰기 성공");
+				}else {
+					request.setAttribute("qnaboaredResult", "답글쓰기 실패");
+				}
 			}
 			// mRequest에서 넘어온 pageNum(mRequest를 사용하면 request의 파라미터들이 다 null이 됨)을 request에 set
 			request.setAttribute("pageNum", mRequest.getParameter("pageNum"));

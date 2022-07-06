@@ -61,7 +61,7 @@
 	</script>
 </head>
 <body>
-	<c:if test="${empty member }">
+	<c:if test="${empty member && empty admin }">
 		<script>
 			alert('로그인 이후 이용가능 합니다');
 			location.href = "loginView.let";
@@ -112,7 +112,15 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						 <input type="button" value="LIST" class="btn" onclick="location='${conPath}/main.do'">
+						<c:if test="${not empty param.pageNum }">
+							<input type="button" value="LIST" class="btn" onclick="location='${conPath}/main.do'">
+						</c:if>
+						<c:if test="${empty param.pageNum && not empty member}">
+							<input type="button" value="LIST" class="btn" onclick="location='${conPath}/myboardList.let'">
+						</c:if>
+						<c:if test="${empty param.pageNum && not empty admin}">
+							<input type="button" value="뒤로가기" class="btn" onclick="history.back()">
+						</c:if>
 					</td>
 				</tr>
 			</table>
@@ -124,13 +132,15 @@
 							<td><input type="hidden" name="bId" value="${mybagboard.bId }"></td>
 							<td><input type="hidden" name="rpageNum" value="${rpageNum }"></td>
 							<td><input type="hidden" name="pageNum" value="${param.pageNum }"></td>
+							<c:if test="${not empty member }">
 							<td class="reply_mId">${member.mId }</td>
-							<td>
-								<input type="text" name="rContent" placeholder="댓글입력창" required="required" class="reply">
-							</td>
-							<td>
-								<input type="submit" value="댓글" class="btn">
-							</td>
+								<td>
+									<input type="text" name="rContent" placeholder="댓글입력창" required="required" class="reply">
+								</td>
+								<td>
+									<input type="submit" value="댓글" class="btn">
+								</td>
+							</c:if>
 						</tr>
 					</table>
 				</form>

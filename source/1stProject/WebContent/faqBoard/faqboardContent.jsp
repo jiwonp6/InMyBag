@@ -41,13 +41,9 @@
 				<tr class="btn">
 					<td>
 					 	<c:if test="${not empty admin }">
-					 		<button onclick="location='${conPath}/faqboardModifyView.do?fId=${faqboard.fId }&pageNum=${param.pageNum }'">수정</button>
-					 		<button onclick="location='${conPath}/faqboardDelete.do?fId=${faqboard.fId }&pageNum=${param.pageNum }'">삭제</button>
+					 		<button class="btn" onclick="location='${conPath}/faqboardModifyView.do?fId=${faqboard.fId }&pageNum=${param.pageNum }'">수정</button>
+					 		<button class="btn" onclick="location='${conPath}/faqboardDelete.do?fId=${faqboard.fId }&pageNum=${param.pageNum }'">삭제</button>
 				 		</c:if>
-					</td>
-				</tr>
-				<tr class="btn">
-					<td>
 					 	<input type="button" value="LIST" class="btn" onclick="location='${conPath}/faqboardList.do?pageNum=${param.pageNum }'">
 					</td>
 				</tr>

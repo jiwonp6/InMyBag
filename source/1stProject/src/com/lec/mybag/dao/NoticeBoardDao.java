@@ -288,7 +288,7 @@ public class NoticeBoardDao {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM NOITCEBOARD WHERE nID=?";
+		String sql = "DELETE FROM NOTICEBOARD WHERE nID=?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -309,4 +309,28 @@ public class NoticeBoardDao {
 		}
 		return result;
 	}
+	// (10) 회원탈퇴 하기 전 회원이 쓴 글 모두 삭제 후 탈퇴
+		public void AllDeleteNoticeBoard(String aId) {
+			int result = FAIL;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = "DELETE FROM NOTICEBOARD WHERE aID = ?";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, aId);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
 }

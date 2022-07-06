@@ -28,6 +28,15 @@ import com.lec.mybag.item.service.ItemBoardWriteService;
 import com.lec.mybag.like.service.LikeMyBagCountService;
 import com.lec.mybag.like.service.LikeMyBagDeleteService;
 import com.lec.mybag.like.service.LikeMyBagWriteService;
+import com.lec.mybag.member.service.MJoinService;
+import com.lec.mybag.member.service.MLoginService;
+import com.lec.mybag.member.service.MLogoutService;
+import com.lec.mybag.member.service.MModifyService;
+import com.lec.mybag.member.service.MWithdrawalService;
+import com.lec.mybag.member.service.MemailConfirmService;
+import com.lec.mybag.member.service.MidConfirmService;
+import com.lec.mybag.member.service.MyBoardListService;
+import com.lec.mybag.member.service.Service;
 import com.lec.mybag.mybag.service.MyBagBoardContentService;
 import com.lec.mybag.mybag.service.MyBagBoardDeleteService;
 import com.lec.mybag.mybag.service.MyBagBoardListService;
@@ -55,15 +64,6 @@ import com.lec.mybag.reply.service.ReplyMyBagModifyViewService;
 import com.lec.mybag.reply.service.ReplyMyBagReplyService;
 import com.lec.mybag.reply.service.ReplyMyBagReplyViewService;
 import com.lec.mybag.reply.service.ReplyMyBagWriteService;
-import com.lec.mybag.service.MJoinService;
-import com.lec.mybag.service.MLoginService;
-import com.lec.mybag.service.MLogoutService;
-import com.lec.mybag.service.MModifyService;
-import com.lec.mybag.service.MWithdrawalService;
-import com.lec.mybag.service.MemailConfirmService;
-import com.lec.mybag.service.MidConfirmService;
-import com.lec.mybag.service.MyBoardListService;
-import com.lec.mybag.service.Service;
 
 //Servlet implementation class MybagController
 @WebServlet("*.do")
@@ -288,7 +288,7 @@ public class MybagController extends HttpServlet {
 			service = new QnaBoardModifyViewService();
 			service.execute(request, response);
 			viewPage = "qnaBoard/qnaboardModify.jsp";
-		}else if(com.equals("/qnaboradModify.do")) {
+		}else if(com.equals("/qnaboardModify.do")) {
 			service = new QnaBoardModifyService();
 			service.execute(request, response);
 			viewPage = "myboardList.let";
@@ -296,6 +296,18 @@ public class MybagController extends HttpServlet {
 			service = new QnaBoardDeleteService();
 			service.execute(request, response);
 			viewPage = "myboardList.let";
+		}else if(com.equals("/qnaboardreplyModifyView.do")) {	//답글수정view
+			service = new QnaBoardModifyViewService();
+			service.execute(request, response);
+			viewPage = "qnaBoard/qnaboardreplyModify.jsp";
+		}else if(com.equals("/qnaboardreplyModify.do")) {	//답글수정
+			service = new QnaBoardModifyService();
+			service.execute(request, response);
+			viewPage = "qnaboardList.do";
+		}else if(com.equals("/qnaboardreplyDelete.do")) {	//답글삭제
+			service = new QnaBoardDeleteService();
+			service.execute(request, response);
+			viewPage = "qnaboardList.do";
 		}else if(com.equals("/qnaboardReplyView.do")) {
 			service = new QnaBoardReplyViewService();
 			service.execute(request, response);

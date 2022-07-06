@@ -26,11 +26,11 @@
 <body>
 	<jsp:include page="../main/header.jsp" />
 	<div id="content_form">
-		<form action="${conPath }/qnaboradModify.do" method="post" enctype="multipart/form-data">
+		<form action="${conPath }/qnaboardModify.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="qId" value="${qnaboard.qId }"> 
 			<input type="hidden" name="dbFilename" value="${qnaboard.qFilename }">
 			<table>
-				<caption>ITEM Q&A</caption>
+				<caption>QnaBoard 수정</caption>
 				<tr>
 					<td>제목</td>
 					<td><input type="text" name="qTitle"

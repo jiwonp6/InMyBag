@@ -53,6 +53,19 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
+	
+	<c:if test="${mybagboardResult eq 'mybag글삭제 실패' }">
+		<script>
+			alert('댓글이 있어 글 삭제가 불가능합니다');
+			history.back();
+		</script>
+	</c:if>
+	<c:if test="${mybagboardResult eq 'mybag글삭제 성공' }">
+		<script>
+			alert('${mybagboardResult }');
+		</script>
+	</c:if>
+	
 	<article style="height:500px;">
 		<header style="height:50px;">
 			<h1>MyBag BOARD</h1>
@@ -78,25 +91,33 @@
 				</tr>
 				<c:if test="${btotCnt==0 }">
 					<tr>
-						<td colspan="6">작성한 글이 없습니다</td>
+						<td colspan="5">작성한 글이 없습니다</td>
 					</tr>
 				</c:if>
 				<c:if test="${btotCnt!=0 }">
 					<c:forEach items="${mybagboardList }" var="mybagboard">
-						<tr>
+						<tr class="mybagboard">
 							<td>${mybagboard.bId }</td>
 							<td class="left">${mybagboard.bName } <!-- 글제목에 a태그를 걸지 말고 query로 tr을 클릭하면 상세보기 페이지로 가기 -->
 								<c:if test="${not empty mybagboard.bFilename }">
-									<img
-										src="https://cdn-icons-png.flaticon.com/512/5088/5088374.png"
-										width="10">
+									<img src="https://cdn-icons-png.flaticon.com/512/5088/5088374.png" width="10">
 								</c:if>
 							</td>
 							<td>${mybagboard.mId }</td>
 							<td>${mybagboard.bHit }</td>
-							<td>
-						 		<button onclick="location='${conPath}/mybagboardModifyView.do?bId=${mybagboard.bId }'" class="btn">수정</button> /
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="5" style="text-align: right; padding-right: 30px; width:10px;">
+								<c:if test="${not empty member }">
+							 		<button onclick="location='${conPath}/mybagboardModifyView.do?bId=${mybagboard.bId }'" class="btn">수정</button> /
+								</c:if>
 						 		<button onclick="location='${conPath}/mybagboardDelete.do?bId=${mybagboard.bId }'" class="btn">삭제</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<hr>
 							</td>
 						</tr>
 					</c:forEach>
@@ -105,7 +126,7 @@
 		</section>
 		<footer>
 			<c:if test="${bstartPage > bBLOCKSIZE }">
-				[ <a href="${conPath }/myboardList.let?bpageNum=${bstartPage-1 }">
+				[ <a href="${conPath }/myboardList.let?bpageNum=${bstartPage-1 }&mId=${param.mId }">
 					이전 </a> ]
 			</c:if>
 			<c:forEach var="n" begin="${bstartPage }" end="${bendPage }">
@@ -113,11 +134,11 @@
 					<b> [ ${n } ] </b>
 				</c:if>
 				<c:if test="${n != bpageNum }">
-					[ <a href="${conPath }/myboardList.let?bpageNum=${n }"> ${n } </a> ]
+					[ <a href="${conPath }/myboardList.let?bpageNum=${n }&mId=${param.mId }"> ${n } </a> ]
 				</c:if>
 			</c:forEach>
 			<c:if test="${bendPage<bpageCnt }">
-			  [ <a href="${conPath }/myboardList.let?bpageNum=${bendPage+1}">
+			  [ <a href="${conPath }/myboardList.let?bpageNum=${bendPage+1}&mId=${param.mId }">
 					다음 </a> ]
 			</c:if>
 		</footer>
@@ -157,9 +178,19 @@
 							<td>${replymybag.bId }</td>
 							<td class="left">${replymybag.rContent }</td>
 							<td>${replymybag.mId }</td>
-							<td>
-						 		<button onclick="location='${conPath}/replymybagModifyView.do?rId=${replymybag.rId }'" class="btn">수정</button> /
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="5" style="text-align: right; padding-right: 30px; width:10px;">
+								<c:if test="${not empty member }">
+						 			<button onclick="location='${conPath}/replymybagModifyView.do?rId=${replymybag.rId }'" class="btn">수정</button> /
+						 		</c:if>
 						 		<button onclick="location='${conPath}/replymybagDelete.do?rId=${replymybag.rId }'" class="btn">삭제</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<hr>
 							</td>
 						</tr>
 					</c:forEach>
@@ -168,7 +199,7 @@
 		</section>
 		<footer>
 			<c:if test="${rstartPage > rBLOCKSIZE }">
-				[ <a href="${conPath }/myboardList.let?rpageNum=${rstartPage-1 }">
+				[ <a href="${conPath }/myboardList.let?rpageNum=${rstartPage-1 }&mId=${param.mId }">
 					이전 </a> ]
 			</c:if>
 			<c:forEach var="n" begin="${rstartPage }" end="${rendPage }">
@@ -176,11 +207,11 @@
 					<b> [ ${n } ] </b>
 				</c:if>
 				<c:if test="${n != rpageNum }">
-					[ <a href="${conPath }/myboardList.let?rpageNum=${n }"> ${n } </a> ]
+					[ <a href="${conPath }/myboardList.let?rpageNum=${n }&mId=${param.mId }"> ${n } </a> ]
 				</c:if>
 			</c:forEach>
 			<c:if test="${rendPage<rpageCnt }">
-			  [ <a href="${conPath }/myboardList.let?rpageNum=${rendPage+1}">
+			  [ <a href="${conPath }/myboardList.let?rpageNum=${rendPage+1}&mId=${param.mId }">
 					다음 </a> ]
 			</c:if>
 		</footer>
@@ -229,9 +260,19 @@
 								</c:if></td>
 							<td>${itemboard.mId }</td>
 							<td>${itemboard.iHit }</td>
-							<td>
-						 		<button onclick="location='${conPath}/itemboardModifyView.do?iId=${itemboard.iId }'" class="btn">수정</button> /
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="5" style="text-align: right; padding-right: 30px; width:10px;">
+								<c:if test="${not empty member }">
+						 			<button onclick="location='${conPath}/itemboardModifyView.do?iId=${itemboard.iId }'" class="btn">수정</button> /
+						 		</c:if>
 						 		<button onclick="location='${conPath}/itemboardDelete.do?iId=${itemboard.iId }'" class="btn">삭제</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<hr>
 							</td>
 						</tr>
 					</c:forEach>
@@ -240,7 +281,7 @@
 		</section>
 		<footer>
 			<c:if test="${istartPage > iBLOCKSIZE }">
-				[ <a href="${conPath }/myboardList.let?ipageNum=${istartPage-1 }">
+				[ <a href="${conPath }/myboardList.let?ipageNum=${istartPage-1 }&mId=${param.mId }">
 					이전 </a> ]
 			</c:if>
 			<c:forEach var="n" begin="${istartPage }" end="${iendPage }">
@@ -248,11 +289,11 @@
 					<b> [ ${n } ] </b>
 				</c:if>
 				<c:if test="${n != ipageNum }">
-					[ <a href="${conPath }/myboardList.let?ipageNum=${n }"> ${n } </a> ]
+					[ <a href="${conPath }/myboardList.let?ipageNum=${n }&mId=${param.mId }"> ${n } </a> ]
 				</c:if>
 			</c:forEach>
 			<c:if test="${iendPage<ipageCnt }">
-			  [ <a href="${conPath }/myboardList.let?ipageNum=${iendPage+1}">
+			  [ <a href="${conPath }/myboardList.let?ipageNum=${iendPage+1}&mId=${param.mId }">
 					다음 </a> ]
 			</c:if>
 		</footer>
@@ -296,9 +337,20 @@
 							</td>
 							<td>${qnaboard.mId }</td>
 							<td>${qnaboard.qHit }</td>
-							<td>
-						 		<button onclick="location='${conPath}/qnaboardModifyView.do?qId=${qnaboard.qId }'" class="btn">수정</button> / 
+							<td></td>
+							
+						</tr>
+						<tr>
+							<td colspan="5" style="text-align: right; padding-right: 30px; width:10px;">
+								<c:if test="${not empty member }">
+						 			<button onclick="location='${conPath}/qnaboardModifyView.do?qId=${qnaboard.qId }'" class="btn">수정</button> / 
+						 		</c:if>
 						 		<button onclick="location='${conPath}/qnaboardDelete.do?qId=${qnaboard.qId }'" class="btn">삭제</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<hr>
 							</td>
 						</tr>
 					</c:forEach>
@@ -307,7 +359,7 @@
 		</section>
 		<footer>
 			<c:if test="${qstartPage > qBLOCKSIZE }">
-				[ <a href="${conPath }/myboardList.let?qpageNum=${qstartPage-1 }">
+				[ <a href="${conPath }/myboardList.let?qpageNum=${qstartPage-1 }&mId=${param.mId }">
 					이전 </a> ]
 			</c:if>
 			<c:forEach var="n" begin="${qstartPage }" end="${qendPage }">
@@ -315,11 +367,11 @@
 					<b> [ ${n } ] </b>
 				</c:if>
 				<c:if test="${n != qpageNum }">
-					[ <a href="${conPath }/myboardList.let?qpageNum=${n }"> ${n } </a> ]
+					[ <a href="${conPath }/myboardList.let?qpageNum=${n }&mId=${param.mId }"> ${n } </a> ]
 				</c:if>
 			</c:forEach>
 			<c:if test="${qendPage<qpageCnt }">
-			  [ <a href="${conPath }/myboardList.let?qpageNum=${qendPage+1}">
+			  [ <a href="${conPath }/myboardList.let?qpageNum=${qendPage+1}&mId=${param.mId }">
 					다음 </a> ]
 			</c:if>
 		</footer>

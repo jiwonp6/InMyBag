@@ -23,7 +23,7 @@
 	</script>
 </head>
 <body>
-	<c:if test="${empty member }">
+	<c:if test="${empty member && empty admin}">
 		<script>
 			alert('로그인 이후 이용가능 합니다');
 			location.href = "loginView.let";

@@ -48,8 +48,16 @@
 					</tr>
 					<tr>
 						<td class="btn" colspan="2">
-						 	<button class="btn" onclick="location='${conPath}/itemboardReplyView.do?iId=${itemboard.iId }&pageNum=${param.pageNum }'">REPLY</button>
-						 	<input type="button" value="LIST" class="btn" onclick="location='${conPath}/itemboardList.do?pageNum=${param.pageNum }'">
+							<c:if test="${not empty param.pageNum }">
+							 	<button class="btn" onclick="location='${conPath}/itemboardReplyView.do?iId=${itemboard.iId }&pageNum=${param.pageNum }'">REPLY</button>
+							 	<input type="button" value="LIST" class="btn" onclick="location='${conPath}/itemboardList.do?pageNum=${param.pageNum }'">
+							</c:if>
+							<c:if test="${empty param.pageNum && not empty member}">
+								<input type="button" value="LIST" class="btn" onclick="location='${conPath}/myboardList.let'">
+							</c:if>
+							<c:if test="${empty param.pageNum && not empty admin}">
+								<input type="button" value="뒤로가기" class="btn" onclick="history.back()">
+							</c:if>
 						</td>
 					</tr>
 				</table>

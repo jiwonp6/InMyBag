@@ -1,9 +1,13 @@
 --query
 --?��?��?��ADMIN?��?��?��
     --?��INSERT MINI DATA
-    INSERT INTO ADMIN (aID, aPW, aNAME, aKING) VALUES ('aKING', '111', '최고�?리자?���?', 1);
+    INSERT INTO ADMIN (aID, aPW, aNAME, aKING) VALUES ('aKING', '111', '최고관리자', 1);
+    commit;
     INSERT INTO ADMIN (aID, aPW, aNAME) VALUES ('aaa', '111', '박박�?');
     SELECT * FROM ADMIN;
+    SELECT * FROM (SELECT ROWNUM RN, A.* FROM 
+					 (SELECT * FROM ADMIN ORDER BY aKING DESC, aID ) A)
+					 WHERE RN BETWEEN 1 AND 100;
     --(1)LOGIN CHECK
     SELECT * FROM ADMIN WHERE aID='aaa' and aPW='111';
     --(2)get ADMIN DTO(for session)
@@ -26,6 +30,7 @@
     --?��INSERT MINI DATA
     INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL) VALUES ('aaa', '111', '박박�?', '99-09-09', 'park@park.com');
     SELECT * FROM MEMBER;
+    select * from member where mId like '%'||'aaa'||'%';
     --(1)LOGIN CHECK
     SELECT * FROM MEMBER WHERE mID='aaa' and mPW='111';
     --(2)get MEMBER DTO(for session)
@@ -111,8 +116,9 @@
                            qFILENAME = NULL,
                            qRDATE = SYSDATE,
                            qIP = '112.169.33.198'
-                        WHERE qID=1;
+                        WHERE qID=5;
     COMMIT;
+    select * from qnaBoard where qid='5';
     --(7)DELETE QNABOARD
     DELETE FROM QNABOARD WHERE qID=1;
     ROLLBACK;

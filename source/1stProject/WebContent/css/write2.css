@@ -34,7 +34,7 @@ article.write table tr.write td{
 	text-align: right;
 }
 
-input.qTitle{
+input.title{
 	border:1px solid gray;
 	border-radius:20px;
 	height: 25px;
@@ -52,7 +52,7 @@ textarea{
 	font-size:15px;
 	margin:5px 0;
 }
-input.qTitle:hover,
+input.title:hover,
 textarea:hover{
 	background-color: lightgray;
 }

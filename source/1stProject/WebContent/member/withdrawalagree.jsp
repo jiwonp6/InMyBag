@@ -8,14 +8,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="conPath/css/header.css" rel="stylesheet">
+	<link href="${conPath }/css/join.css" rel="stylesheet">
 	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-	<style></style>
+	<style>
+		table.textbox{
+			padding:100px;
+		}
+		p.textpool{
+			text-align: left;
+		}
+		td.btn{
+			text-align: center;
+			padding:10px;
+		}
+	</style>
 </head>
 <body>
 <jsp:include page="../main/header.jsp" />
 	<form action="${conPath }/withdrawalView.let" method="post">
-	<table>
+	<table class="textbox">
 		<tr>
 			<td>
 				<fieldset>
@@ -32,7 +43,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">
+			<td class="btn" colspan="2">
 				<input type="submit" value="회원탈퇴확인" class="btn">
 				<input type="button" value="이전" class="btn" onclick="history.back()">
 			</td>

@@ -40,7 +40,9 @@
 		</header>
 		<section class="qna">
 			<div class="write">
-				<a href="${conPath }/qnaboardWriteView.do">문의하기</a>
+				<c:if test="${not empty member }">
+					<a href="${conPath }/qnaboardWriteView.do">문의하기</a>
+				</c:if>
 			</div>
 			<table>
 				<tr>

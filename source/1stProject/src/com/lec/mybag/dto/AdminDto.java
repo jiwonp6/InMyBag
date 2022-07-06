@@ -12,6 +12,12 @@ public class AdminDto {
 		this.aName = aName;
 		this.aKing = aKing;
 	}
+	public AdminDto(String aId, String aPw, String aName) {
+		this.aId = aId;
+		this.aPw = aPw;
+		this.aName = aName;
+	}
+	
 	public String getaId() {
 		return aId;
 	}

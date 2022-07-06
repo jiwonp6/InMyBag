@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.lec.mybag.dao.LikeMyBagDao;
 import com.lec.mybag.dto.MemberDto;
-import com.lec.mybag.service.Service;
+import com.lec.mybag.member.service.Service;
 
 public class LikeMyBagCountService implements Service {
 

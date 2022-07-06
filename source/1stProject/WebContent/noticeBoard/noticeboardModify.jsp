@@ -8,43 +8,44 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath }/css/header.css" rel="stylesheet">
+	<link href="${conPath }/css/write2.css" rel="stylesheet">
 	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 	<style></style>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<div id="content_form">
+	<article class="write">
+		<section>
 		<form action="${conPath }/noticeboradModify.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="pageNum" value="${param.pageNum }">
 			<input type="hidden" name="nId" value="${noticeboard.nId }"> 
 			<input type="hidden" name="dbFilename" value="${noticeboard.nFilename }">
+			<div class="title">
+				<h2>NOTICE</h2>
+			</div>
 			<table>
-				<caption>ITEM Q&A</caption>
 				<tr>
-					<td>제목</td>
-					<td><input type="text" name="nTitle"
+					<td class="id">제목</td>
+					<td><input type="text" name="nTitle" class="title"
 						value="${noticeboard.nTitle }" required="required" size="30"></td>
 				</tr>
 				<tr>
-					<td>본문</td>
+					<td class="id">본문</td>
 					<td><textarea name="nContent" rows="3" cols="32">${noticeboard.nContent }</textarea></td>
 				</tr>
 				<tr>
-					<th>첨부파일</th>
-					<td>
-						<input type="file" name="nFilename" class="btn">
-						 
+					<td colspan="2" style="text-align: right; padding:0 30px 20px 0; font-size: 13px;">
 						<c:if test="${not empty noticeboard.nFilename }">
-							<p>원첨부파일 : </p>
-							<p>
-								<img src="${conPath }/noticeBoardFileUp/${noticeboard.nFilename}" width="250" height="300">
-							</p>
-							<a>${noticeboard.nFilename}</a>
+							원첨부파일 : <a>${noticeboard.nFilename}</a>
 						</c:if> 
 						<c:if test="${empty noticeboard.nFilename }">
-						 		원첨부파일 : 첨부파일없음
+							원첨부파일 : 첨부파일없음
 						</c:if>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: right;">
+						<input type="file" name="nFilename">
 					</td>
 				</tr>
 				<tr>
@@ -56,7 +57,8 @@
 				</tr>
 			</table>
 		</form>
-	</div>
+	</section>
+	</article>
 	<jsp:include page="../main/footer.jsp" />
 </body>
 </html>

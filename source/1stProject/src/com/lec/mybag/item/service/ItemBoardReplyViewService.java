@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lec.mybag.dao.ItemBoardDao;
 import com.lec.mybag.dto.ItemBoardDto;
-import com.lec.mybag.service.Service;
+import com.lec.mybag.member.service.Service;
 
 public class ItemBoardReplyViewService implements Service {
 

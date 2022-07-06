@@ -8,27 +8,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="conPath/css/header.css" rel="stylesheet">
+	<link href="${conPath }/css/write2.css" rel="stylesheet">
 	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 	<style></style>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<div id="content_form">
+	<article class="write">
+	<section>
 		<form action="${conPath }/faqboardWrite.do" method="post" enctype="multipart/form-data">
+			<div class="title">
+				<h2> FAQ </h2>
+			</div>		
 			<table>
-				<caption>FAQ</caption>
 				<tr>
-					<td>제목</td>
-					<td><input type="text" name="fTitle" required="required" size="30"></td>
+					<td class="id">제목</td>
+					<td><input type="text" name="fTitle" class="title" required="required" size="30"></td>
 				</tr>
 				<tr>
-					<td>본문</td>
+					<td class="id">본문</td>
 					<td><textarea name="fContent" rows="3" cols="32"></textarea></td>
 				</tr>
 				<tr>
-					<td>첨부파일</td>
-					<td><input type="file" name="fFilename"></td>
+					<td colspan="2" style="text-align: right;"><input type="file" name="fFilename"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -39,7 +41,8 @@
 				</tr>
 			</table>
 		</form>
-	</div>
+	</section>
+	</article>
 	<jsp:include page="../main/footer.jsp" />
 </body>
 </html>
