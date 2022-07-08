@@ -30,7 +30,7 @@
 					<td>이미지</td>
 				</tr>
 				<tr>
-					<td><input type="text" name="iTitle" required="required" placeholder="Q : 제목을 입력해주세요" class="bName"></td>
+					<td><input type="text" name="iTitle" required="required" placeholder="Q : 제목을 입력해주세요" class="title"></td>
 				</tr>
 				<tr>
 					<td><textarea name="iContent" rows="5" cols="32" placeholder="내용을 입력해주세요"></textarea></td>

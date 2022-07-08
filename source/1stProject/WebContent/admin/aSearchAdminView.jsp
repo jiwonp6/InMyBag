@@ -22,7 +22,7 @@
 					<table>
 						<tr>
 							<td>
-								<input type="text" name="search_aId" class="search" required="required">
+								<input type="text" name="search_aId" value="${param.search_aId }" class="search" required="required">
 								<input type="submit" value="검색" class="btn" placeholder="관리자검색">
 								<input type="button" value="모든관리자" class="btn" onclick="location.href='${conPath}/allAdminView.let'">
 							</td>

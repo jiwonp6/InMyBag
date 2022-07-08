@@ -12,6 +12,17 @@
 	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
+	<c:if test="${not empty joinErrorMsg }">
+		<script>
+			alert('${joinErrorMsg}');
+			history.back();
+		</script>
+	</c:if>
+	<c:if test="${not empty joinResult }">
+		<script>
+			alert('${joinResult}');
+		</script>
+	</c:if>
 	<jsp:include page="../main/header.jsp" />
 	<div id="content_form">
 		<form action="${conPath }/login.let" method="post">
@@ -20,7 +31,7 @@
 					<td><h1>LOGIN</h1></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="mId" required="required" 
+					<td><input type="text" name="mId"  value="${mId }" required="required" 
 								placeholder="아이디" 
 								style="width:400px; height:50px; font-size:15px; border:0.5px solid lightgray;">
 					</td>

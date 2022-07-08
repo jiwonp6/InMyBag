@@ -22,7 +22,7 @@
 					<table>
 						<tr>
 							<td>
-								<input type="text" name="search_mId" class="search" required="required">
+								<input type="text" name="search_mId" value="${param.search_mId }" class="search" required="required">
 								<input type="submit" value="검색" class="btn" placeholder="회원검색">
 								<input type="button" value="모든회원" class="btn" onclick="location.href='${conPath}/allView.let'">
 							</td>

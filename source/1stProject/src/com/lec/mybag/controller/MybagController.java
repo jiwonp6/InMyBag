@@ -95,36 +95,36 @@ public class MybagController extends HttpServlet {
 		 * * * * * * * * * MyBagBoard 관련 요청  * * * * * * *
 		 * * * * * * * * * * *  * * * * * * * * * * * * */
 		if(com.equals("/main.do")) {	// "/mybagboardList.do"
-			service = new MyBagBoardListService();
+			service = new MyBagBoardListService();	//글 리스트
 			service.execute(request, response);
 			viewPage = "mybagBoard/mybagboardList.jsp";
-		}else if(com.equals("/append.do")) {
+		}else if(com.equals("/append.do")) {	//댓글추가
 			service = new MyBagBoardListService();
 			service.execute(request, response);
 			viewPage = "mybagBoard/append.jsp";
-		}else if(com.equals("/mybagboardWriteView.do")) {
+		}else if(com.equals("/mybagboardWriteView.do")) {//글쓰기 모듈
 			viewPage = "mybagBoard/mybagboardWrite.jsp";
-		}else if(com.equals("/mybagboardWrite.do")) {
+		}else if(com.equals("/mybagboardWrite.do")) {//글쓰기
 			service = new MyBagBoardWriteService();
 			service.execute(request, response);
 			viewPage = "main.do";
-		}else if(com.equals("/mybagboardContent.do")) {
+		}else if(com.equals("/mybagboardContent.do")) {//글내용상세보기
 			service = new MyBagBoardContentService();
 			service.execute(request, response);
-			service = new ReplyMyBagListService();
+			service = new ReplyMyBagListService();	//댓글리스트
 			service.execute(request, response);
-			service = new LikeMyBagCountService();
+			service = new LikeMyBagCountService();	//좋아요표시
 			service.execute(request, response);
 			viewPage = "mybagBoard/mybagboardContent.jsp";
-		}else if(com.equals("/mybagboardModifyView.do")) {
+		}else if(com.equals("/mybagboardModifyView.do")) {//글수정모듈
 			service = new MyBagBoardModifyViewService();
 			service.execute(request, response);
 			viewPage = "mybagBoard/mybagboardModify.jsp";
-		}else if(com.equals("/mybagboradModify.do")) {
+		}else if(com.equals("/mybagboradModify.do")) {//글수정
 			service = new MyBagBoardModifyService();
 			service.execute(request, response);
 			viewPage = "myboardList.let";
-		}else if(com.equals("/mybagboardDelete.do")) {
+		}else if(com.equals("/mybagboardDelete.do")) {//글삭제
 			service = new MyBagBoardDeleteService();
 			service.execute(request, response);
 			viewPage = "myboardList.let";
@@ -138,19 +138,19 @@ public class MybagController extends HttpServlet {
 			service = new ReplyMyBagListService();
 			service.execute(request, response);
 			viewPage = "replymybag/replyappend.jsp";
-		}else if(com.equals("/replymybagWrite.do")) {
+		}else if(com.equals("/replymybagWrite.do")) {	//댓글쓰기
 			service = new ReplyMyBagWriteService();
 			service.execute(request, response);
 			viewPage = "mybagboardContent.do";
-		}else if(com.equals("/replymybagModifyView.do")) {
+		}else if(com.equals("/replymybagModifyView.do")) {//댓글수정 모듈
 			service = new ReplyMyBagModifyViewService();
 			service.execute(request, response);
 			viewPage = "replymybag/replymybagModify.jsp";
-		}else if(com.equals("/replymybagModify.do")) {
+		}else if(com.equals("/replymybagModify.do")) {//댓글수정
 			service = new ReplyMyBagModifyService();
 			service.execute(request, response);
 			viewPage = "myboardList.let";
-		}else if(com.equals("/replymybagDelete.do")) {
+		}else if(com.equals("/replymybagDelete.do")) {//댓글삭제
 			service = new ReplyMyBagDeleteService();
 			service.execute(request, response);
 			viewPage = "myboardList.let";
@@ -172,37 +172,37 @@ public class MybagController extends HttpServlet {
 		/* * * * * * * * * * *  * * * * * * * * * * * *
 		 * * * * * * * * * ItemBoard 관련 요청  * * * * * * *
 		* * * * * * * * * * *  * * * * * * * * * * * * */
-		else if(com.equals("/itemboardList.do")) {
+		else if(com.equals("/itemboardList.do")) {//글 리스트
 			service = new ItemBoardListService();
 			service.execute(request, response);
 			viewPage = "itemBoard/itemboardList.jsp";
-		}else if(com.equals("/itemboardWriteView.do")) {
+		}else if(com.equals("/itemboardWriteView.do")) {//글쓰기 모듈
 			viewPage = "itemBoard/itemboardWrite.jsp";
-		}else if(com.equals("/itemboardWrite.do")) {
+		}else if(com.equals("/itemboardWrite.do")) {//글쓰기
 			service = new ItemBoardWriteService();
 			service.execute(request, response);
 			viewPage = "itemboardList.do";
-		}else if(com.equals("/itemboardContent.do")) {
+		}else if(com.equals("/itemboardContent.do")) {//글 내용 상세보기
 			service = new ItemBoardContentService();
 			service.execute(request, response);
 			viewPage = "itemBoard/itemboardContent.jsp";
-		}else if(com.equals("/itemboardModifyView.do")) {
+		}else if(com.equals("/itemboardModifyView.do")) {//글 수정 모듈
 			service = new ItemBoardModifyViewService();
 			service.execute(request, response);
 			viewPage = "itemBoard/itemboardModify.jsp";
-		}else if(com.equals("/itemboradModify.do")) {
+		}else if(com.equals("/itemboradModify.do")) {//글수정
 			service = new ItemBoardModifyService();
 			service.execute(request, response);
 			viewPage = "myboardList.let";
-		}else if(com.equals("/itemboardDelete.do")) {
+		}else if(com.equals("/itemboardDelete.do")) {//글삭제
 			service = new ItemBoardDeleteService();
 			service.execute(request, response);
 			viewPage = "myboardList.let";
-		}else if(com.equals("/itemboardReplyView.do")) {
+		}else if(com.equals("/itemboardReplyView.do")) {//답글쓰기 모듈
 			service = new ItemBoardReplyViewService();
 			service.execute(request, response);
 			viewPage = "itemBoard/itemboardReply.jsp";
-		}else if(com.equals("/itemboardReply.do")) {
+		}else if(com.equals("/itemboardReply.do")) {//답글쓰기
 			service = new ItemBoardReplyService();
 			service.execute(request, response);
 			viewPage = "itemboardList.do";
@@ -210,29 +210,29 @@ public class MybagController extends HttpServlet {
 		/* * * * * * * * * * *  * * * * * * * * * * * *
 		 * * * * * * * * * NoticeBoard 관련 요청  * * * * * * *
 		* * * * * * * * * * *  * * * * * * * * * * * * */
-		else if(com.equals("/noticeboardList.do")) {
+		else if(com.equals("/noticeboardList.do")) {//글 리스트
 			service = new NoticeBoardListService();
 			service.execute(request, response);
 			viewPage = "noticeBoard/noticeboardList.jsp";
-		}else if(com.equals("/noticeboardWriteView.do")) {
+		}else if(com.equals("/noticeboardWriteView.do")) {//글쓰기 모듈
 			viewPage = "noticeBoard/noticeboardWrite.jsp";
-		}else if(com.equals("/noticeboardWrite.do")) {
+		}else if(com.equals("/noticeboardWrite.do")) {//글쓰기
 			service = new NoticeBoardWriteService();
 			service.execute(request, response);
 			viewPage = "noticeboardList.do";
-		}else if(com.equals("/noticeboardContent.do")) {
+		}else if(com.equals("/noticeboardContent.do")) {//글내용 상세보기
 			service = new NoticeBoardContentService();
 			service.execute(request, response);
 			viewPage = "noticeBoard/noticeboardContent.jsp";
-		}else if(com.equals("/noticeboardModifyView.do")) {
+		}else if(com.equals("/noticeboardModifyView.do")) {//글수정 모듈
 			service = new NoticeBoardModifyViewService();
 			service.execute(request, response);
 			viewPage = "noticeBoard/noticeboardModify.jsp";
-		}else if(com.equals("/noticeboradModify.do")) {
+		}else if(com.equals("/noticeboradModify.do")) {//글수정
 			service = new NoticeBoardModifyService();
 			service.execute(request, response);
 			viewPage = "noticeboardList.do";
-		}else if(com.equals("/noticeboardDelete.do")) {
+		}else if(com.equals("/noticeboardDelete.do")) {//글삭제
 			service = new NoticeBoardDeleteService();
 			service.execute(request, response);
 			viewPage = "noticeboardList.do";
@@ -240,29 +240,29 @@ public class MybagController extends HttpServlet {
 		/* * * * * * * * * * *  * * * * * * * * * * * *
 		 * * * * * * * * * FAQBoard 관련 요청  * * * * * * *
 		* * * * * * * * * * *  * * * * * * * * * * * * */
-		else if(com.equals("/faqboardList.do")) {
+		else if(com.equals("/faqboardList.do")) {//글 리스트
 			service = new faqBoardListService();
 			service.execute(request, response);
 			viewPage = "faqBoard/faqboardList.jsp";
-		}else if(com.equals("/faqboardWriteView.do")) {
+		}else if(com.equals("/faqboardWriteView.do")) {//글쓰기 모듈
 			viewPage = "faqBoard/faqboardWrite.jsp";
-		}else if(com.equals("/faqboardWrite.do")) {
+		}else if(com.equals("/faqboardWrite.do")) {//글쓰기
 			service = new faqBoardWriteService();
 			service.execute(request, response);
 			viewPage = "faqboardList.do";
-		}else if(com.equals("/faqboardContent.do")) {
+		}else if(com.equals("/faqboardContent.do")) {//글내용 상세보기
 			service = new faqBoardContentService();
 			service.execute(request, response);
 			viewPage = "faqBoard/faqboardContent.jsp";
-		}else if(com.equals("/faqboardModifyView.do")) {
+		}else if(com.equals("/faqboardModifyView.do")) {//글수정 모듈
 			service = new faqBoardModifyViewService();
 			service.execute(request, response);
 			viewPage = "faqBoard/faqboardModify.jsp";
-		}else if(com.equals("/faqboradModify.do")) {
+		}else if(com.equals("/faqboradModify.do")) {//글수정
 			service = new faqBoardModifyService();
 			service.execute(request, response);
 			viewPage = "faqboardList.do";
-		}else if(com.equals("/faqboardDelete.do")) {
+		}else if(com.equals("/faqboardDelete.do")) {//글삭제
 			service = new faqBoardDeleteService();
 			service.execute(request, response);
 			viewPage = "faqboardList.do";
@@ -270,32 +270,40 @@ public class MybagController extends HttpServlet {
 		/* * * * * * * * * * *  * * * * * * * * * * * *
 		 * * * * * * * * * QNABoard 관련 요청  * * * * * * *
 		* * * * * * * * * * *  * * * * * * * * * * * * */
-		else if(com.equals("/qnaboardList.do")) {
+		else if(com.equals("/qnaboardList.do")) {//글 리스트
 			service = new QnaBoardListService();
 			service.execute(request, response);
 			viewPage = "qnaBoard/qnaboardList.jsp";
-		}else if(com.equals("/qnaboardWriteView.do")) {
+		}else if(com.equals("/qnaboardWriteView.do")) {//글쓰기 모듈
 			viewPage = "qnaBoard/qnaboardWrite.jsp";
-		}else if(com.equals("/qnaboardWrite.do")) {
+		}else if(com.equals("/qnaboardWrite.do")) {//글쓰기
 			service = new QnaBoardWriteService();
 			service.execute(request, response);
 			viewPage = "qnaboardList.do";
-		}else if(com.equals("/qnaboardContent.do")) {
+		}else if(com.equals("/qnaboardContent.do")) {//글 내용 상세보기
 			service = new QnaBoardContentService();
 			service.execute(request, response);
 			viewPage = "qnaBoard/qnaboardContent.jsp";
-		}else if(com.equals("/qnaboardModifyView.do")) {
+		}else if(com.equals("/qnaboardModifyView.do")) {//글 수정 모듈
 			service = new QnaBoardModifyViewService();
 			service.execute(request, response);
 			viewPage = "qnaBoard/qnaboardModify.jsp";
-		}else if(com.equals("/qnaboardModify.do")) {
+		}else if(com.equals("/qnaboardModify.do")) {//글수정
 			service = new QnaBoardModifyService();
 			service.execute(request, response);
 			viewPage = "myboardList.let";
-		}else if(com.equals("/qnaboardDelete.do")) {
+		}else if(com.equals("/qnaboardDelete.do")) {//글삭제
 			service = new QnaBoardDeleteService();
 			service.execute(request, response);
 			viewPage = "myboardList.let";
+		}else if(com.equals("/qnaboardReplyView.do")) { //답글 쓰기 모듈
+			service = new QnaBoardReplyViewService();
+			service.execute(request, response);
+			viewPage = "qnaBoard/qnaboardReply.jsp";
+		}else if(com.equals("/qnaboardReply.do")) {	//답글쓰기
+			service = new QnaBoardReplyService();
+			service.execute(request, response);
+			viewPage = "qnaboardList.do";
 		}else if(com.equals("/qnaboardreplyModifyView.do")) {	//답글수정view
 			service = new QnaBoardModifyViewService();
 			service.execute(request, response);
@@ -306,14 +314,6 @@ public class MybagController extends HttpServlet {
 			viewPage = "qnaboardList.do";
 		}else if(com.equals("/qnaboardreplyDelete.do")) {	//답글삭제
 			service = new QnaBoardDeleteService();
-			service.execute(request, response);
-			viewPage = "qnaboardList.do";
-		}else if(com.equals("/qnaboardReplyView.do")) {
-			service = new QnaBoardReplyViewService();
-			service.execute(request, response);
-			viewPage = "qnaBoard/qnaboardReply.jsp";
-		}else if(com.equals("/qnaboardReply.do")) {
-			service = new QnaBoardReplyService();
 			service.execute(request, response);
 			viewPage = "qnaboardList.do";
 		}

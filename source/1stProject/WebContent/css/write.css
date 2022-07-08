@@ -31,7 +31,7 @@ article.write table tr td{
 	line-height: 15px;
 	text-align:center;
 }
-input.bName{
+input.title{
 	border:none;
 	border-radius:20px;
 	height: 25px;
@@ -48,7 +48,7 @@ textarea{
 	text-align: center;
 	margin:5px 0;
 }
-input.bName:hover,
+input.title:hover,
 textarea:hover{
 	background-color: lightgray;
 }

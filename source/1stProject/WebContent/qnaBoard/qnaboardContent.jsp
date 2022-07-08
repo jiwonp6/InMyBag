@@ -35,7 +35,7 @@
 					</td>
 				</tr>
 				<tr class="content">
-					<td><pre>${qnaboard.qContent}</pre></td>
+					<td>${qnaboard.qContent}</td>
 				</tr>
 				<tr class="file">
 					<td>
@@ -49,14 +49,14 @@
 				</tr>
 				<tr class="btn">
 					<td>
-						<c:if test="${not empty admin }">
-							<input type="button" value="삭제" class="btn" onclick="location='${conPath}/qnaboardreplyDelete.do?qId=${qnaboard.qId }'">
-							<c:if test="${not empty admin }">
-								<input type="button" value="수정" class="btn" onclick="location='${conPath}/qnaboardreplyModifyView.do?qId=${qnaboard.qId }'">
-							</c:if>
-						</c:if>
 						<c:if test="${empty member and not empty admin}">
 							<button  class="btn" onclick="location='${conPath}/qnaboardReplyView.do?qId=${qnaboard.qId }&pageNum=${param.pageNum }'">REPLY</button>
+						</c:if>
+						<c:if test="${qnaboard.mId eq null and not empty admin }">
+							<input type="button" value="삭제" class="btn" onclick="location='${conPath}/qnaboardreplyDelete.do?qId=${qnaboard.qId }'">
+							<c:if test="${not empty admin }">
+								<input type="button" value="수정" class="btn" onclick="location='${conPath}/qnaboardModifyView.do?qId=${qnaboard.qId }'">
+							</c:if>
 						</c:if>
 						<c:if test="${not empty param.pageNum }">
 							<input type="button" value="LIST" class="btn" onclick="location='${conPath}/qnaboardList.do?pageNum=${param.pageNum }'">

@@ -14,7 +14,7 @@
 	<footer>
 		<div class="footer_wrap">
 			<div class="office_logo">
-				
+				<img src="${conPath }/img/logo.png">
 			</div>
 			<div class="office_address">
 				<ul>

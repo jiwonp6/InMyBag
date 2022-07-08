@@ -28,7 +28,7 @@
 		<section class="table_wrap">
 			<c:if test="${totCnt==0 }">
 				<div class="none">
-					<p>등록된 글이 없습니다</p>
+					<p>좋아요 누른 글이 없습니다</p>
 				</div>
 			</c:if>
 			<c:if test="${totCnt!=0 }">

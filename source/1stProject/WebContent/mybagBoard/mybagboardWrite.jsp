@@ -24,7 +24,7 @@
 					<td>이미지</td>
 				</tr>
 				<tr>
-					<td><input type="text" name="bName" required="required" placeholder="가방이름을 입력해주세요" class="bName"></td>
+					<td><input type="text" name="bName" class="title" required="required" placeholder="가방이름을 입력해주세요" class="bName"></td>
 				</tr>
 				<tr>
 					<td><textarea name="bContent" rows="5" cols="32" placeholder="내용을 입력해주세요"></textarea></td>

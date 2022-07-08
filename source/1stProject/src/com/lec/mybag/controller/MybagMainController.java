@@ -117,17 +117,7 @@ public class MybagMainController extends HttpServlet {
 		/* * * * * * * * * * *  * * * * * * * * * * * *
 		 * * * * * * * * * admin 관련 요청  * * * * * * *
 		* * * * * * * * * * *  * * * * * * * * * * * * */
-		else if(com.equals("/adminjoinView.let")) { // 회원가입 화면
-			viewPage = "admin/join.jsp";
-		}else if(com.equals("/adminidConfirm.let")) {
-			service = new AidConfirmService();
-			service.execute(request, response);
-			viewPage = "admin/idConfirm.jsp";
-		}else if(com.equals("/adminjoin.let")) { // 회원가입 DB 처리
-			service = new AJoinService(); // execute메소드 : aId중복체크 후 회원가입
-			service.execute(request, response);
-			viewPage = "adminloginView.let";
-		}else if(com.equals("/adminloginView.let")) { // 로그인 화면
+		else if(com.equals("/adminloginView.let")) { // 로그인 화면
 			viewPage = "admin/login.jsp";
 		}else if(com.equals("/adminlogin.let")) { // 로그인 DB 및 세션 처리
 			service = new ALoginService();
@@ -163,7 +153,17 @@ public class MybagMainController extends HttpServlet {
 		/* * * * * * * * * * *  * * * * * * * * * * * *
 		 * * * * * * * * * 최고관리자 관련 요청  * * * * * * *
 		* * * * * * * * * * *  * * * * * * * * * * * * */
-		else if(com.equals("/allAdminView.let")) { // 관리자목록가져오기
+		else if(com.equals("/adminjoinView.let")) { // 회원가입 화면
+			viewPage = "admin/join.jsp";
+		}else if(com.equals("/adminidConfirm.let")) {
+			service = new AidConfirmService();
+			service.execute(request, response);
+			viewPage = "admin/idConfirm.jsp";
+		}else if(com.equals("/adminjoin.let")) { // 회원가입 DB 처리
+			service = new AJoinService(); // execute메소드 : aId중복체크 후 회원가입
+			service.execute(request, response);
+			viewPage = "adminloginView.let";
+		}else if(com.equals("/allAdminView.let")) { // 관리자목록가져오기
 			service = new AAllViewService();
 			service.execute(request, response);
 			viewPage = "admin/aAllView.jsp";

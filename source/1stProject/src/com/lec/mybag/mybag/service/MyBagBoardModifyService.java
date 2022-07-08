@@ -39,7 +39,8 @@ public class MyBagBoardModifyService implements Service {
 			String bContent = mRequest.getParameter("bContent");
 			String bIp = request.getRemoteAddr();
 			MyBagBoardDao bDao = MyBagBoardDao.getInstance();
-			int result = bDao.modifyMyBagBoard(bId, bName, bContent, dbFilename, bIp);
+			int result = bDao.modifyMyBagBoard(bId, bName, bContent, bFilename, bIp);
+		
 			// joinMember결과에 따라 적절히 request.setAttribute
 			if(result == MyBagBoardDao.SUCCESS) { // 회원가입 진행
 				request.setAttribute("mybagboardResult", "mybag글수정 성공");
@@ -59,7 +60,7 @@ public class MyBagBoardModifyService implements Service {
 			try {
 				File serverFile = new File(path+"/"+bFilename);
 				is = new FileInputStream(serverFile);
-				os = new FileOutputStream("D:\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\mybagBoardFileUp\\"+bFilename);
+				os = new FileOutputStream("D:\\pjw\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\mybagBoardFileUp\\"+bFilename);
 				byte[] bs = new byte[(int)serverFile.length()];
 				while(true) {
 					int nByteCnt = is.read(bs);

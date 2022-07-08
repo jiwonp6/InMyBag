@@ -59,7 +59,7 @@ public class faqBoardModifyService implements Service {
 			try {
 				File serverFile = new File(path+"/"+fFilename);
 				is = new FileInputStream(serverFile);
-				os = new FileOutputStream("D:\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\faqBoardFileUp\\"+fFilename);
+				os = new FileOutputStream("D:\\pjw\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\faqBoardFileUp\\"+fFilename);
 				byte[] bs = new byte[(int)serverFile.length()];
 				while(true) {
 					int nByteCnt = is.read(bs);

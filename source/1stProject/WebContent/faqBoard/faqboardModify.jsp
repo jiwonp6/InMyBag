@@ -44,6 +44,9 @@
 					</td>
 				</tr>
 				<tr>
+					<td style="padding-top:10px;"><input type="file" name="fFilename"></td>
+				</tr>
+				<tr>
 					<td colspan="2" style="text-align: right;">
 						<input type="file" name="fFilename">
 					</td>

@@ -37,7 +37,7 @@ article.content section table.content tr td{
 }
 article.content section table.reply{
 	margin:10px auto 0;
-	width:240px;
+	width:100%;
 	text-align: center;
 }
 article.content section table th{

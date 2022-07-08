@@ -62,7 +62,7 @@ public class QnaBoardModifyService implements Service {
 			try {
 				File serverFile = new File(path+"/"+qFilename);
 				is = new FileInputStream(serverFile);
-				os = new FileOutputStream("D:\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\qnaBoardFileUp\\"+qFilename);
+				os = new FileOutputStream("D:\\pjw\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\qnaBoardFileUp"+qFilename);
 				byte[] bs = new byte[(int)serverFile.length()];
 				while(true) {
 					int nByteCnt = is.read(bs);

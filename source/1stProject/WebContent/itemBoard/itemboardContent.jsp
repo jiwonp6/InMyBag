@@ -34,7 +34,7 @@
 						<td style="font-weight: bold">Q : ${itemboard.iTitle }</td>
 					</tr>
 					<tr>
-						<td><div class="bonmun"><pre>${itemboard.iContent}</pre></div></td>
+						<td><div class="bonmun">${itemboard.iContent}</div></td>
 					</tr>
 					<tr>
 						<td style="text-align: right; font-size: 10px;">

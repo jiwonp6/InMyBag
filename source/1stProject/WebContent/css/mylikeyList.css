@@ -13,6 +13,12 @@ article.mylikeyList footer{
 	padding:50px;
 	text-align: center;	
 }
+article.mylikeyList section div.none{
+	width: 800px;
+	text-align:center;
+	padding:20px;
+	margin: 0 auto;
+}
 article.mylikeyList section div.table_wrap{
 	overflow: hidden;
 	width: 800px;

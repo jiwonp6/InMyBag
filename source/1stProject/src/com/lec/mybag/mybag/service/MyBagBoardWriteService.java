@@ -40,6 +40,7 @@ public class MyBagBoardWriteService implements Service {
 				String bIp = request.getRemoteAddr();
 				MyBagBoardDao bDao = MyBagBoardDao.getInstance();
 				int result = bDao.writeMyBagBoard(mId, bName, bContent, bFilename, bIp);
+				System.out.println(bFilename);
 				// joinMember결과에 따라 적절히 request.setAttribute
 				if(result == MyBagBoardDao.SUCCESS) { // 회원가입 진행
 					request.setAttribute("mybagboardResult", "글쓰기 성공");
@@ -59,7 +60,7 @@ public class MyBagBoardWriteService implements Service {
 			try {
 				File serverFile = new File(path+"/"+bFilename);
 				is = new FileInputStream(serverFile);
-				os = new FileOutputStream("D:\\webPro\\source\\personalProject\\1stProject\\WebContent\\mybagBoardFileUp\\"+bFilename);
+				os = new FileOutputStream("D:\\pjw\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\mybagBoardFileUp\\"+bFilename);
 				byte[] bs = new byte[(int)serverFile.length()];
 				while(true) {
 					int nByteCnt = is.read(bs);

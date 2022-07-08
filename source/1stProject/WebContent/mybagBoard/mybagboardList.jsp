@@ -128,7 +128,12 @@
 				<c:forEach items="${mybagboardList }" var="mybagboard">
 				<table onclick="fun(${mybagboard.bId})">
 					<tr>
-						<td><img src="${conPath }/mybagBoardFileUp/${mybagboard.bFilename}" width="250" height="300"></td>
+						<c:if test="${not empty mybagboard.bFilename }">
+							<td><img src="${conPath }/mybagBoardFileUp/${mybagboard.bFilename}" width="250" height="300"></td>
+						</c:if>
+						<c:if test="${empty mybagboard.bFilename }">
+							<td><img src="${conPath }/mybagBoardFileUp/noneImg.png" width="250" height="300"></td>
+						</c:if>
 					</tr>
 					<tr>
 						<td>${mybagboard.bName }(${mybagboard.bHit })</td>

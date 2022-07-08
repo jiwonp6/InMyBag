@@ -97,7 +97,7 @@
 				</tr>
 				<tr>
 					<td>
-						<div class="bonmun"><pre>${mybagboard.bContent}</pre></div>
+						<div class="bonmun">${mybagboard.bContent}</div>
 					</td>
 				</tr>
 				<tr>
@@ -157,11 +157,7 @@
 							</tr>
 							<tr>
 								<td class="left">
-									<c:forEach var="n" begin="1"
-										end="${replymybag.rIndent }">
-										<c:if test="${n==replymybag.rIndent }">└</c:if>
-										<c:if test="${n!=replymybag.rIndent }"> &nbsp; &nbsp; </c:if>
-									</c:forEach> ${replymybag.rContent }
+								 ${replymybag.rContent }
 								</td>
 							</tr>
 						</table>

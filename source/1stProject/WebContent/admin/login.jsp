@@ -12,6 +12,17 @@
 	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
+	<c:if test="${not empty joinErrorMsg }">
+		<script>
+			alert('${joinErrorMsg}');
+			history.back();
+		</script>
+	</c:if>
+	<c:if test="${not empty joinResult }">
+		<script>
+			alert('${joinResult}');
+		</script>
+	</c:if>
 	<jsp:include page="../main/header.jsp" />
 	<div id="content_form">
 		<form action="${conPath }/adminlogin.let" method="post">
@@ -20,7 +31,7 @@
 					<td><h1>LOGIN</h1>(관리자모드)</td>
 				</tr>
 				<tr>
-					<td><input type="text" name="aId" required="required" 
+					<td><input type="text" name="aId" value="${aId }" required="required" 
 								placeholder="아이디" 
 								style="width:400px; height:50px; font-size:15px; border:0.5px solid lightgray;">
 					</td>
@@ -31,14 +42,10 @@
 					</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
-				<tr class="search">
-					<td><a href="${conPath }/adminjoinView.let">관리자 회원가입</a></td>
-				</tr>
 				<tr><td>&nbsp;</td></tr>
 				<tr>
 					<td>
 						<input type="submit" value="LOGIN" class="btn" style="height:30px;">
-						<input type="button" value="JOIN US" class="btn"	onclick="location.href='${conPath}/adminjoinView.let'" style="height:30px;">
 					</td>
 				</tr>
 			</table>

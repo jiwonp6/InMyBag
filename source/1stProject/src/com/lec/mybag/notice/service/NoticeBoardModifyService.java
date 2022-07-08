@@ -58,7 +58,7 @@ public class NoticeBoardModifyService implements Service {
 			try {
 				File serverFile = new File(path+"/"+nFilename);
 				is = new FileInputStream(serverFile);
-				os = new FileOutputStream("D:\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\noticeBoardFileUp\\"+nFilename);
+				os = new FileOutputStream("D:\\pjw\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\noticeBoardFileUp\\"+nFilename);
 				byte[] bs = new byte[(int)serverFile.length()];
 				while(true) {
 					int nByteCnt = is.read(bs);

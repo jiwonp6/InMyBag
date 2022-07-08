@@ -198,6 +198,7 @@ public class MyBagBoardDao {
 			pstmt.setString(4, bFilename);
 			pstmt.setString(5, bIp);
 			result = pstmt.executeUpdate();
+			System.out.println("안녕");
 			System.out.println(result == SUCCESS ? "myBAG게시판 글쓰기성공" : "myBAG게시판 글쓰기실패");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

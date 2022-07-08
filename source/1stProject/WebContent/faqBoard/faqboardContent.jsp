@@ -26,7 +26,7 @@
 					<td>작성자 : 관리자</td>
 				</tr>
 				<tr class="content">
-					<td><pre>${faqboard.fContent }</pre></td>
+					<td>${faqboard.fContent }</td>
 				</tr>
 				<tr class="file">
 					<td>

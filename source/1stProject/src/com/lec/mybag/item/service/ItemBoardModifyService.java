@@ -59,7 +59,7 @@ public class ItemBoardModifyService implements Service {
 			try {
 				File serverFile = new File(path+"/"+iFilename);
 				is = new FileInputStream(serverFile);
-				os = new FileOutputStream("D:\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\itemBoardFileUp\\"+iFilename);
+				os = new FileOutputStream("D:\\pjw\\webPro\\source\\08_1stProject\\1stProject\\WebContent\\itemBoardFileUp\\"+iFilename);
 				byte[] bs = new byte[(int)serverFile.length()];
 				while(true) {
 					int nByteCnt = is.read(bs);
